@@ -1,0 +1,7 @@
+package graph;
+
+public interface ProcessedVertexes {
+	public boolean isProcessed(Vertex vertex) ;
+	public void add(Vertex vertex);
+	
+}
