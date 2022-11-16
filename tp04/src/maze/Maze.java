@@ -1,8 +1,22 @@
 package maze;
-import graph.Graph;
+import java.util.ArrayList;
+import graph.*;
 
 public class Maze implements Graph{
-	public List<Vertex> getAllVertexes();
-	public List<Vertex> getSuccessors(Vertex vertex);
-	public int getWeight(Vertex src, Vertex dst);
+	private MazeBox[][] boxes;
+		
+	public ArrayList<Vertex> getAllVertexes(){
+		ArrayList<Vertex> allVertexes = new ArrayList<Vertex>();
+		for (MazeBox[] box1 : boxes) {
+			for (MazeBox box : box1) {
+				allVertexes.add(box);
+			}
+		}
+		return allVertexes;
+	}
+	
+	
+	
+	//public List<Vertex> getSuccessors(Vertex vertex);
+	//public int getWeight(Vertex src, Vertex dst);
 }
