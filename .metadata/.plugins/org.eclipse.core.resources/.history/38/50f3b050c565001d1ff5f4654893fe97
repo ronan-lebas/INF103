@@ -35,9 +35,7 @@ public class Maze implements Graph{
 		if (isInMaze(x,y-1)) {successors.add(boxes[x][y-1]);}
 		if (isInMaze(x+e,y+1)) {successors.add(boxes[x+e][y+1]);}
 		if (isInMaze(x+e,y-1)) {successors.add(boxes[x+e][y-1]);}
-		ArrayList<Vertex> successors2 = new ArrayList<Vertex>();
-		for (Vertex vertex2 : successors) {if (((MazeBox) vertex2).isWalkable()) {successors2.add(vertex2);}}
-		return successors2;
+		return successors;
 	}
 	
 	
