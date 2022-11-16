@@ -1,6 +1,4 @@
 package maze;
-import java.util.ArrayList;
-
 import graph.Vertex;
 
 public abstract class MazeBox implements Vertex{
