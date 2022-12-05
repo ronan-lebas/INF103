@@ -1,16 +1,13 @@
 package maze;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import graph.*;
 
 public class Maze implements Graph{
 	private MazeBox[][] boxes;
-	private int height;// = boxes[0].length;
-	private int[] width;// = boxes.length;
+	private int height = boxes[0].length;
+	private int width = boxes.length;
 	private boolean isInMaze(int i, int j) {
-		if (i>-1 && i < width[j] && j > -1 && j < height) {return true;}
+		if (i>-1 && i < width && j > -1 && j < height) {return true;}
 		return false;
 	}
 		
@@ -44,43 +41,7 @@ public class Maze implements Graph{
 	}
 	
 	
-	public int getDistance(Vertex src, Vertex dst) {
+	public int getWeight(Vertex src, Vertex dst) {
 		//0 si c'est les memes, 1 si ils sont voisins, -1 sinon
-		if (src == dst) {return 0;}
-		ArrayList<Vertex> successors = getSuccessors(src);
-		if (successors.contains(dst)) {return 1;}
-		return -1;		
 	}
-	
-	public final void initFromTextFile(String fileName) {
-		try {
-			ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
-			height = lines.size();
-			for (String line : lines) {width[width.length] = line.length();}
-			
-
-		}
-		catch(IOException ex) {}
-		finally {}
-	}
-	
-	
-	
-	
-	
-	
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,10 +7,10 @@ import graph.*;
 
 public class Maze implements Graph{
 	private MazeBox[][] boxes;
-	private int height;// = boxes[0].length;
-	private int[] width;// = boxes.length;
+	private int height = boxes[0].length;
+	private int width = boxes.length;
 	private boolean isInMaze(int i, int j) {
-		if (i>-1 && i < width[j] && j > -1 && j < height) {return true;}
+		if (i>-1 && i < width && j > -1 && j < height) {return true;}
 		return false;
 	}
 		
@@ -54,14 +54,13 @@ public class Maze implements Graph{
 	
 	public final void initFromTextFile(String fileName) {
 		try {
-			ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
-			height = lines.size();
-			for (String line : lines) {width[width.length] = line.length();}
-			
+			ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get("data/labyrinthe.maze"));
+			for (String line : lines) {
+				System.out.println(line);
+			}
 
 		}
 		catch(IOException ex) {}
-		finally {}
 	}
 	
 	

@@ -8,9 +8,9 @@ import graph.*;
 public class Maze implements Graph{
 	private MazeBox[][] boxes;
 	private int height;// = boxes[0].length;
-	private int[] width;// = boxes.length;
+	private int width;// = boxes.length;
 	private boolean isInMaze(int i, int j) {
-		if (i>-1 && i < width[j] && j > -1 && j < height) {return true;}
+		if (i>-1 && i < width && j > -1 && j < height) {return true;}
 		return false;
 	}
 		
@@ -56,8 +56,10 @@ public class Maze implements Graph{
 		try {
 			ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
 			height = lines.size();
-			for (String line : lines) {width[width.length] = line.length();}
-			
+			width = lines.get(0).length();
+			for (String line : lines) {
+				System.out.println(line);
+			}
 
 		}
 		catch(IOException ex) {}
