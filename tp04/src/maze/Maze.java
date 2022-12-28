@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import graph.*;
 
 public class Maze implements Graph{
-	private MazeBox[][] boxes;
 	private int height;// = boxes[0].length;
-	private int[] width;// = boxes.length;
+	private int width;// = boxes.length;
+	private MazeBox[][] boxes;
 	private boolean isInMaze(int i, int j) {
-		if (i>-1 && i < width[j] && j > -1 && j < height) {return true;}
+		if (i>-1 && i < width && j > -1 && j < height) {return true;}
 		return false;
 	}
 		
@@ -52,26 +52,67 @@ public class Maze implements Graph{
 		return -1;		
 	}
 	
-	public final void initFromTextFile(String fileName) {
+	public final void initFromTextFile(String fileName) throws MazeReadingException, IOException {
 		try {
 			ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
 			height = lines.size();
-			for (String line : lines) {width[width.length] = line.length();}
+			width = lines.get(0).length();
+			boxes = new MazeBox[width][height];
 			for (int j=0; j<height; j++) {
-				for (int i=0; i<width[j]; i++) {
+				if (lines.get(j).length() != width) throw new MazeReadingException(fileName,j+1,"Le nombre de cases par ligne n'est pas constant.");
+				for (int i=0; i<width; i++) {
 					//remplit boxes
-					boxes[i][j] = new MazeBox();
+					switch(""+lines.get(j).charAt(i)){
+						case "E": 
+							boxes[i][j] = new EmptyBox(this,i,j);
+							break;
+						case "W": 
+							boxes[i][j] = new WallBox(this,i,j);
+							break;
+						case "A": 
+							boxes[i][j] = new ArrivalBox(this,i,j);
+							break;
+						case "D": 
+							boxes[i][j] = new DepartureBox(this,i,j);
+							break;
+						default : 
+							throw new MazeReadingException(fileName, j+1, "Un caractère n'est pas valide");
+					}		
 				}
 			}
-
 		}
-		catch(IOException ex) {}
+		catch(MazeReadingException ex) {}
+		catch(IOException ex) {System.out.print("Erreur avec le fichier"); ex.printStackTrace();}
+		finally {}
+	}
+	
+	public final void saveToTextFile(String fileName) throws MazeReadingException,IOException{
+		try {
+			ArrayList<String> lines = new ArrayList<String>();
+			for (int j=0;j<height;j++) {
+				String line = new String();
+				for (int i=0;i<width;i++) {
+					line = line + this.boxes[i][j].getLabel();
+				}
+				lines.add(line);
+			}
+			Files.write(Paths.get(fileName),lines);
+		}
+		catch(Exception ex) {System.out.print("Erreur avec le fichier"); ex.printStackTrace();}
 		finally {}
 	}
 	
 	
-	
-	
+
+
+
+
+
+
+
+
+
+
 	
 	
 	

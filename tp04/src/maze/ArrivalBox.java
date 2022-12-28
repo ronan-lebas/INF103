@@ -1,9 +1,11 @@
 package maze;
 
 public class ArrivalBox extends MazeBox {
-	public String getLabel() {
-		return "ArrivalBox";
+
+	public ArrivalBox(Maze maze, int x, int y) {
+		super(maze,x,y,"A");
 	}
+
 	public boolean isWalkable() {
 		return true;
 	}
