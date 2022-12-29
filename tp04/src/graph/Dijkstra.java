@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.ArrayList;
+import maze.*;
 
 
 public class Dijkstra {
@@ -24,8 +25,9 @@ public class Dijkstra {
 				}
 			vertexes.remove(pivotVertex);
 			int minIndex = 0;
-			for (int i = 0; i<vertexes.size();i++) {if (minDistance.minDistance(vertexes.get(i)) != -1 && minDistance.minDistance(vertexes.get(i)) < minDistance.minDistance(vertexes.get(minIndex))) minIndex = i;}
+			for (int i = 0; i<vertexes.size();i++) {if (minDistance.minDistance(vertexes.get(i)) != -1 && (minDistance.minDistance(vertexes.get(i)) < minDistance.minDistance(vertexes.get(minIndex)) || minDistance.minDistance(vertexes.get(minIndex)) == -1)) minIndex = i;}
 			pivotVertex = vertexes.get(minIndex);
+
 		}
 	
 		

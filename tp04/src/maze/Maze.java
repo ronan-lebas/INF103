@@ -25,7 +25,7 @@ public class Maze implements Graph{
 		ArrayList<Vertex> allVertexes = new ArrayList<Vertex>();
 		for (MazeBox[] box1 : boxes) {
 			for (MazeBox box : box1) {
-				allVertexes.add(box);
+				if(box.isWalkable()) {allVertexes.add(box);}
 			}
 		}
 		return allVertexes;
