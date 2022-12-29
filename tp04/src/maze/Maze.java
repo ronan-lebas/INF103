@@ -58,6 +58,8 @@ public class Maze implements Graph{
 			height = lines.size();
 			width = lines.get(0).length();
 			boxes = new MazeBox[width][height];
+			boolean hasDeparture = false;
+			boolean hasArrival = false;
 			for (int j=0; j<height; j++) {
 				if (lines.get(j).length() != width) throw new MazeReadingException(fileName,j+1,"Le nombre de cases par ligne n'est pas constant.");
 				for (int i=0; i<width; i++) {
@@ -70,13 +72,15 @@ public class Maze implements Graph{
 							boxes[i][j] = new WallBox(this,i,j);
 							break;
 						case "A": 
-							boxes[i][j] = new ArrivalBox(this,i,j);
+							if (! hasArrival) {boxes[i][j] = new ArrivalBox(this,i,j); hasArrival = ! hasArrival;}
+							else {throw new MazeReadingException(fileName, j+1, "Il y a deux cases d'arrivée.");}
 							break;
 						case "D": 
-							boxes[i][j] = new DepartureBox(this,i,j);
+							if (! hasDeparture) {boxes[i][j] = new DepartureBox(this,i,j); hasDeparture = ! hasDeparture;}
+							else {throw new MazeReadingException(fileName, j+1, "Il y a deux cases de départ.");}
 							break;
 						default : 
-							throw new MazeReadingException(fileName, j+1, "Un caractère n'est pas valide");
+							throw new MazeReadingException(fileName, j+1, "Un caractère n'est pas valide.");
 					}		
 				}
 			}
