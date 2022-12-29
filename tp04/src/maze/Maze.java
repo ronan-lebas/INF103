@@ -11,6 +11,11 @@ public class Maze implements Graph{
 	private MazeBox[][] boxes;
 	private ArrivalBox arrivalBox;
 	private DepartureBox departureBox;
+
+	public DepartureBox getDepartureBox() {return departureBox;}
+	public ArrivalBox getArrivalBox() {return arrivalBox;}
+
+
 	private boolean isInMaze(int i, int j) {
 		if (i>-1 && i < width && j > -1 && j < height) {return true;}
 		return false;
