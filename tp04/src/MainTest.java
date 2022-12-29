@@ -2,7 +2,7 @@
 
 import java.io.IOException;
 
-import graph.Dijkstra;
+import graph.*;
 import maze.Maze;
 import maze.MazeReadingException;
 
@@ -18,7 +18,7 @@ public class MainTest {
 		catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		//Dijkstra.dijkstra(maze, maze.departureBox, maze.arrivalBox)
+		ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
 	
 	
 	}
