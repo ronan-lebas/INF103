@@ -9,6 +9,8 @@ public class Maze implements Graph{
 	private int height;// = boxes[0].length;
 	private int width;// = boxes.length;
 	private MazeBox[][] boxes;
+	private ArrivalBox arrivalBox;
+	private DepartureBox departureBox;
 	private boolean isInMaze(int i, int j) {
 		if (i>-1 && i < width && j > -1 && j < height) {return true;}
 		return false;
@@ -72,11 +74,11 @@ public class Maze implements Graph{
 							boxes[i][j] = new WallBox(this,i,j);
 							break;
 						case "A": 
-							if (! hasArrival) {boxes[i][j] = new ArrivalBox(this,i,j); hasArrival = ! hasArrival;}
+							if (! hasArrival) {boxes[i][j] = new ArrivalBox(this,i,j); hasArrival = ! hasArrival; this.arrivalBox = (ArrivalBox) boxes[i][j];}
 							else {throw new MazeReadingException(fileName, j+1, "Il y a deux cases d'arrivée.");}
 							break;
 						case "D": 
-							if (! hasDeparture) {boxes[i][j] = new DepartureBox(this,i,j); hasDeparture = ! hasDeparture;}
+							if (! hasDeparture) {boxes[i][j] = new DepartureBox(this,i,j); hasDeparture = ! hasDeparture; this.departureBox = (DepartureBox) boxes[i][j];}
 							else {throw new MazeReadingException(fileName, j+1, "Il y a deux cases de départ.");}
 							break;
 						default : 
