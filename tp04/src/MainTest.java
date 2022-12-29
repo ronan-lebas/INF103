@@ -1,10 +1,8 @@
-
-
 import java.io.IOException;
+import java.util.ArrayList;
 
 import graph.*;
-import maze.Maze;
-import maze.MazeReadingException;
+import maze.*;
 
 public class MainTest {
 
@@ -19,7 +17,8 @@ public class MainTest {
 			ex.printStackTrace();
 		}
 		ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
-	
+		ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
+		for (Vertex vertex : shortestPath) {System.out.println("X : "+((MazeBox) vertex).getX()+", Y : "+((MazeBox) vertex).getY());}
 	
 	}
 
