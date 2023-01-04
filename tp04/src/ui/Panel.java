@@ -11,6 +11,5 @@ public class Panel extends JPanel {
         setLayout(new BorderLayout());
         Buttons buttons = new Buttons();
         add(buttons,BorderLayout.SOUTH);
-
     }
 }
