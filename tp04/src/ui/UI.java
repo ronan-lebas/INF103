@@ -13,9 +13,11 @@ import main.*;
 public class UI extends JFrame {
     private Main main;
     private Maze maze;
+    private boolean modeSelected;
     public UI(Main main,Maze maze) {
         super("Labyrinthe");
         this.maze = maze;
+        this.modeSelected = false;
         Panel panel = new Panel();
         setContentPane(panel);
         
@@ -36,7 +38,8 @@ public class UI extends JFrame {
 
         load.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {main.load();}} );
         save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {main.save();}} );
-
+        solve.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {modeSelected = false;}} );
+        edit.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {modeSelected = true;}} );        
 
 
 
