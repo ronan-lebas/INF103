@@ -1,14 +1,21 @@
 package ui;
 
+
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-public class UI extends JFrame {
+import maze.*;
+import main.*;
 
-    public UI() {
+
+public class UI extends JFrame {
+    private Main main;
+    private Maze maze;
+    public UI(Main main,Maze maze) {
         super("Labyrinthe");
+        this.maze = maze;
         Panel panel = new Panel();
         setContentPane(panel);
         
@@ -27,8 +34,8 @@ public class UI extends JFrame {
         mode.add(solve);
         mode.add(edit);
 
-        load.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {System.out.println("tets");}} );
-
+        load.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {main.load();}} );
+        save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {main.save();}} );
 
 
 
