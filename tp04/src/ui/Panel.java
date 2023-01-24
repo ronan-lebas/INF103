@@ -18,7 +18,7 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         g.setColor(Color.blue);
         Hexagon h = new Hexagon(200, 200, 100);
-        g.drawPolygon(h.getXList(),h.getYList(),6);
+        g.fillPolygon(h.getXList(),h.getYList(),6);
      }   
 
     }

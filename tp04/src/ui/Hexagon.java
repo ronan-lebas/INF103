@@ -24,34 +24,34 @@ public class Hexagon {
         double a = x;
         double b = y;
         a = x + d;
-        b = y - d*Math.tan(Math.PI/3);
+        b = y - d*Math.tan(Math.PI/6);
         xList[0] = (int)Math.round(a);
         yList[0] = (int)Math.round(b);
 
         a = x + d;
-        b = y + d*Math.tan(Math.PI/3);
+        b = y + d*Math.tan(Math.PI/6);
         xList[1] = (int)Math.round(a);
         yList[1] = (int)Math.round(b);
 
         a = x - d;
-        b = y - d*Math.tan(Math.PI/3);
-        xList[2] = (int)Math.round(a);
-        yList[2] = (int)Math.round(b);
+        b = y - d*Math.tan(Math.PI/6);
+        xList[4] = (int)Math.round(a);
+        yList[4] = (int)Math.round(b);
 
         a = x - d;
-        b = y + d*Math.tan(Math.PI/3);
+        b = y + d*Math.tan(Math.PI/6);
         xList[3] = (int)Math.round(a);
         yList[3] = (int)Math.round(b);
 
         a = x;
-        b = y - d/Math.cos(Math.PI/3);
-        xList[4] = (int)Math.round(a);
-        yList[4] = (int)Math.round(b);
-
-        a = x;
-        b = y + d/Math.cos(Math.PI/3);
+        b = y - d/Math.cos(Math.PI/6);
         xList[5] = (int)Math.round(a);
         yList[5] = (int)Math.round(b);
+
+        a = x;
+        b = y + d/Math.cos(Math.PI/6);
+        xList[2] = (int)Math.round(a);
+        yList[2] = (int)Math.round(b);
 
     }
 }
