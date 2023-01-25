@@ -45,7 +45,6 @@ public class UI extends JFrame {
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(700,700));
         pack();
         setVisible(true);
 

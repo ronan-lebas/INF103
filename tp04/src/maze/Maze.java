@@ -14,6 +14,8 @@ public class Maze implements Graph{
 	private ArrivalBox arrivalBox;
 	private DepartureBox departureBox;
 
+	public MazeBox[][] getBoxes() {return boxes;}
+
 	public DepartureBox getDepartureBox() {return departureBox;}
 	public ArrivalBox getArrivalBox() {return arrivalBox;}
 

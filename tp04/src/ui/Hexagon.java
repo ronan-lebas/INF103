@@ -1,17 +1,23 @@
 package ui;
 import java.lang.Math;
-import java.awt.Polygon;
+import java.awt.*;
 public class Hexagon extends Polygon {
     private int x;
     private int y;
     private float d;
     public final int npoints;
+    private Color color;
+
+    public Color getColor() {
+        return color;
+    }
     
-    public Hexagon(int x, int y, int d) {
+    public Hexagon(int x, int y, int d, Color color) {
         npoints = 6;
         this.x = x;
         this.y = y;
         this.d = d;
+        this.color = color;
 
         double a = x;
         double b = y;
