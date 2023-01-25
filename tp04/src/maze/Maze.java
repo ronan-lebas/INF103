@@ -8,6 +8,8 @@ import graph.*;
 public class Maze implements Graph{
 	private int height;// = boxes[0].length;
 	private int width;// = boxes.length;
+	public int getHeight(){return height;}
+	public int getWidth(){return width;}
 	private MazeBox[][] boxes;
 	private ArrivalBox arrivalBox;
 	private DepartureBox departureBox;
@@ -60,7 +62,7 @@ public class Maze implements Graph{
 	}
 	
 	public final void initFromTextFile(String fileName) throws MazeReadingException, IOException {
-		try {
+		
 			ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
 			height = lines.size();
 			width = lines.get(0).length();
@@ -91,14 +93,10 @@ public class Maze implements Graph{
 					}		
 				}
 			}
-		}
-		catch(MazeReadingException ex) {}
-		catch(IOException ex) {System.out.print("Erreur avec le fichier"); ex.printStackTrace();}
-		finally {}
+		
 	}
 	
 	public final void saveToTextFile(String fileName) throws MazeReadingException,IOException{
-		try {
 			ArrayList<String> lines = new ArrayList<String>();
 			for (int j=0;j<height;j++) {
 				String line = new String();
@@ -109,9 +107,6 @@ public class Maze implements Graph{
 			}
 			Files.write(Paths.get(fileName),lines);
 		}
-		catch(Exception ex) {System.out.print("Erreur avec le fichier"); ex.printStackTrace();}
-		finally {}
-	}
 	
 	
 

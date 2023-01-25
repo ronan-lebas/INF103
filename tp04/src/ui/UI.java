@@ -18,7 +18,7 @@ public class UI extends JFrame {
         super("Labyrinthe");
         this.maze = maze;
         this.modeSelected = false;
-        Panel panel = new Panel();
+        Panel panel = new Panel(maze);
         setContentPane(panel);
         
         JMenuBar menuBar = new JMenuBar();

@@ -11,13 +11,14 @@ public class Main {
 	private UI ui;
 	public Main(){
 		this.maze = new Maze();
+		load();
 		this.ui = new UI(this,this.maze);
 	}
 
 	public void load(){
 		System.out.println("LOAD"); 
 		try {
-			maze.initFromTextFile("C:/Users/ronan/Documents/Télécom/1A/INF/INF103/projet/tp04/data/labyrinthe1.maze");
+			maze.initFromTextFile("C:/Users/ronan/Documents/Telecom/1A/INF/INF103/projet/tp04/data/labyrinthe1.maze");
 		} 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
@@ -27,7 +28,7 @@ public class Main {
 	public void save(){
 		System.out.println("SAVE"); 
 		try {
-			maze.saveToTextFile("C:/Users/ronan/Documents/Télécom/1A/INF/INF103/projet/tp04/data/labyrinthe2.maze");
+			maze.saveToTextFile("C:/Users/ronan/Documents/Telecom/1A/INF/INF103/projet/tp04/data/labyrinthe2.maze");
 		} 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
@@ -42,7 +43,9 @@ public class Main {
 
 		
 		
-		
+		/*catch(MazeReadingException ex) {}
+		catch(IOException ex) {System.out.print("Erreur avec le fichier"); ex.printStackTrace();}
+		finally {}*/
 		
 		
 		
