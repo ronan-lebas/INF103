@@ -14,10 +14,11 @@ public class Panel extends JPanel {
         super();
         this.maze = maze;
         hexagonList = new Hexagon[this.maze.getWidth()][this.maze.getHeight()];
-    
+        int d = 50;
+        int origin = 100;
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
-                hexagonList[i][j] = new Hexagon(20 + 10*i, 20 + 10*j, 10);
+                hexagonList[i][j] = new Hexagon(origin + (d+d/10)*((j%2)+2*i), origin + (d)*(2*j), d);
             }
         }
 
