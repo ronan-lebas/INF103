@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -8,14 +9,16 @@ import maze.Maze;
 
 public class Panel extends JPanel {
     private Maze maze;
+    private UI ui;
     private Hexagon[][] hexagonList;
     private final int d = 50;
     private final int border = 2*d;
     private final int origin = border + d/5;
 
-    public Panel(Maze maze) {
+    public Panel(UI ui, Maze maze) {
         super();
         this.maze = maze;
+        this.ui = ui;
         hexagonList = new Hexagon[this.maze.getWidth()][this.maze.getHeight()];
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
@@ -31,10 +34,13 @@ public class Panel extends JPanel {
         setBackground(Color.black);
         setLayout(new BorderLayout());
         int n = 2*d*maze.getWidth() + 2*border;
-        int m = 2*d*maze.getHeight() + 2*border;
+        int m = 2*d*maze.getHeight() + (int) (1.5*border);
         setPreferredSize(new Dimension(n,m));
         Buttons buttons = new Buttons();
         add(buttons,BorderLayout.SOUTH);
+        JButton button = new JButton("Test");
+        add(button,BorderLayout.NORTH);
+        button.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {ui.main.solve();}} );
         repaint();
     }
     @Override
