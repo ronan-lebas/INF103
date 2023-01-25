@@ -40,12 +40,6 @@ public class Main {
 	public static void main(String[] args) {
 	
 		Main main = new Main();
-
-		
-		
-		/*catch(MazeReadingException ex) {}
-		catch(IOException ex) {System.out.print("Erreur avec le fichier"); ex.printStackTrace();}
-		finally {}*/
 		
 		
 		
