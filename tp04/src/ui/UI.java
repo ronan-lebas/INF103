@@ -13,12 +13,14 @@ import main.*;
 public class UI extends JFrame {
     private Main main;
     private Maze maze;
+    private Panel panel;
     private boolean modeSelected;
     public UI(Main main,Maze maze) {
         super("Labyrinthe");
         this.maze = maze;
         this.modeSelected = false;
-        Panel panel = new Panel(maze);
+        Panel panel = new Panel(this,maze);
+        this.panel = panel;
         setContentPane(panel);
         
         JMenuBar menuBar = new JMenuBar();

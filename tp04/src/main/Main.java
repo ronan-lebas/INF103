@@ -35,6 +35,11 @@ public class Main {
 			ex.printStackTrace();
 		}
 	}
+	public void solve(){
+		ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
+		ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
+		for (Vertex vertex : shortestPath) {System.out.println("X : "+((MazeBox) vertex).getX()+", Y : "+((MazeBox) vertex).getY());}
+	}
 	
 	
 	public static void main(String[] args) {
@@ -44,10 +49,6 @@ public class Main {
 		
 		
 		
-		/*
-		ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
-		ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
-		for (Vertex vertex : shortestPath) {System.out.println("X : "+((MazeBox) vertex).getX()+", Y : "+((MazeBox) vertex).getY());}
-	*/
+
 	}
 }
