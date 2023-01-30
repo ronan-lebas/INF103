@@ -91,7 +91,7 @@ public class GUI extends JFrame {
     }
 
     public void click(int x, int y, boolean isLeftClick){
-        MazeBox selectedBox = maze.getBoxes()[0][0];
+        MazeBox selectedBox = null;
         System.out.println("X : "+ x +", Y : "+ y + ", click gauche : "+isLeftClick);
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
@@ -100,7 +100,10 @@ public class GUI extends JFrame {
                 }
             }
         }
-        System.out.println(selectedBox.getLabel());
+        if(isLeftClick){
+            if(selectedBox.getLabel() == "E"){changeBox(selectedBox.getX(), selectedBox.getY(), "W");}
+            else{changeBox(selectedBox.getX(), selectedBox.getY(), "W");}
+        }
         getPanel().repaint();
     }
 

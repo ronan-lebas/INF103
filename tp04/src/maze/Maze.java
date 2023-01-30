@@ -124,7 +124,7 @@ public class Maze implements Graph{
 				boxes[i][j] = new DepartureBox(this, i, j);
 				updateBox(departureBox.getX(),departureBox.getY(),"E");
 				departureBox = (DepartureBox) boxes[i][j];
-			break;
+				break;
 			case "W" :
 				boxes[i][j] = new WallBox(this, i, j);
 				break;
