@@ -15,6 +15,7 @@ public class Panel extends JPanel {
     public GUI getGUI(Panel this){return gui;}
     
     private Hexagon[][] hexagonList;
+    public Hexagon[][] getHexagonList(){return hexagonList;}
     private final int d = 50;
     private final int border = 2*d;
     private final int origin = border + d/5;
@@ -40,12 +41,10 @@ public class Panel extends JPanel {
         int n = 2*d*maze.getWidth() + 2*border;
         int m = 2*d*maze.getHeight() + (int) (1.5*border);
         setPreferredSize(new Dimension(n,m));
-        Buttons buttons = new Buttons();
+        Buttons buttons = new Buttons(this);
         add(buttons,BorderLayout.SOUTH);
-        JButton button = new JButton("Test");
-        add(button,BorderLayout.NORTH);
-        button.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {getGUI().solve();}} );
         repaint();
+        addMouseListener(new MouseDetector(this));
     }
     @Override
     protected void paintComponent(Graphics g){

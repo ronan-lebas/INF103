@@ -60,7 +60,7 @@ public class GUI extends JFrame {
     public void load(){
 		System.out.println("LOAD"); 
 		try {
-			maze.initFromTextFile("C:/Users/ronan/Documents/Telecom/1A/INF/INF103/projet/tp04/data/labyrinthe1.maze");
+			maze.initFromTextFile("C:/Users/ronan/Documents/Telecom/1A/INF/INF103/projet/tp04/data/current_lab.maze");
 		} 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
@@ -70,7 +70,7 @@ public class GUI extends JFrame {
 	public void save(){
 		System.out.println("SAVE"); 
 		try {
-			maze.saveToTextFile("C:/Users/ronan/Documents/Telecom/1A/INF/INF103/projet/tp04/data/labyrinthe2.maze");
+			maze.saveToTextFile("C:/Users/ronan/Documents/Telecom/1A/INF/INF103/projet/tp04/data/saved_lab.maze");
 		} 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
@@ -85,6 +85,24 @@ public class GUI extends JFrame {
             getPanel().repaintHexagon(getPanel().getGraphics(), ((MazeBox) vertex).getX(),((MazeBox) vertex).getY(), Color.CYAN);
         }
 	}
+
+    private void changeBox(int i, int j, String newType){
+        maze.updateBox(i, j, newType);
+    }
+
+    public void click(int x, int y, boolean isLeftClick){
+        MazeBox selectedBox = maze.getBoxes()[0][0];
+        System.out.println("X : "+ x +", Y : "+ y + ", click gauche : "+isLeftClick);
+        for(int i = 0; i < maze.getWidth(); i++) {
+            for(int j = 0; j < maze.getHeight(); j++) {
+                if(getPanel().getHexagonList()[i][j].contains(x,y)){
+                    selectedBox = maze.getBoxes()[i][j];
+                }
+            }
+        }
+        System.out.println(selectedBox.getLabel());
+        getPanel().repaint();
+    }
 
     public static void main(String[] args) {
 	

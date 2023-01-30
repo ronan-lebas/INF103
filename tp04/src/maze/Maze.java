@@ -110,6 +110,27 @@ public class Maze implements Graph{
 			Files.write(Paths.get(fileName),lines);
 		}
 	
+	public final void updateBox(int i, int j, String newType){
+		switch(newType){
+			case "E" :
+				boxes[i][j] = new EmptyBox(this, i, j);
+				break;
+			case "A" :
+				boxes[i][j] = new ArrivalBox(this, i, j);
+				updateBox(arrivalBox.getX(),arrivalBox.getY(),"E");
+				arrivalBox = (ArrivalBox) boxes[i][j];
+				break;
+			case "D" :
+				boxes[i][j] = new DepartureBox(this, i, j);
+				updateBox(departureBox.getX(),departureBox.getY(),"E");
+				departureBox = (DepartureBox) boxes[i][j];
+			break;
+			case "W" :
+				boxes[i][j] = new WallBox(this, i, j);
+				break;
+		}
+	}
+	
 	
 
 
