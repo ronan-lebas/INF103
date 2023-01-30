@@ -5,20 +5,24 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import graph.Graph;
 import maze.Maze;
 
 public class Panel extends JPanel {
     private Maze maze;
-    private UI ui;
+    private GUI gui;
+    
+    public GUI getGUI(Panel this){return gui;}
+    
     private Hexagon[][] hexagonList;
     private final int d = 50;
     private final int border = 2*d;
     private final int origin = border + d/5;
 
-    public Panel(UI ui, Maze maze) {
+    public Panel(GUI gui, Maze maze) {
         super();
         this.maze = maze;
-        this.ui = ui;
+        this.gui = gui;
         hexagonList = new Hexagon[this.maze.getWidth()][this.maze.getHeight()];
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
@@ -40,7 +44,7 @@ public class Panel extends JPanel {
         add(buttons,BorderLayout.SOUTH);
         JButton button = new JButton("Test");
         add(button,BorderLayout.NORTH);
-        button.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {ui.main.solve();}} );
+        button.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {getGUI().solve();}} );
         repaint();
     }
     @Override
@@ -53,6 +57,11 @@ public class Panel extends JPanel {
             }
         }
 
-     }   
+     }
+    
+    public void repaintHexagon(Graphics g, int i, int j, Color color) {
+        g.setColor(color);
+        g.fillPolygon(hexagonList[i][j]);
+    }
 
 }
