@@ -96,12 +96,15 @@ public class GUI extends JFrame {
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
                 if(getPanel().getHexagonList()[i][j].contains(x,y)){
-                    selectedBox = maze.getBoxes()[i][j];
+                    selectedBox = maze.getBoxes(i,j);
                 }
             }
         }
         if(isLeftClick){
-            if(selectedBox.getLabel() == "E"){changeBox(selectedBox.getX(), selectedBox.getY(), "W");}
+            if(selectedBox.getLabel() == "E"){
+                changeBox(selectedBox.getX(), selectedBox.getY(), "W");
+                System.out.println("SELECTED BOX : "+selectedBox.getLabel());
+            }
             else{changeBox(selectedBox.getX(), selectedBox.getY(), "W");}
         }
         getPanel().repaint();
