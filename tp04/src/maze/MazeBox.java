@@ -1,5 +1,7 @@
 package maze;
 import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.*;
 
 import graph.Vertex;
 
@@ -8,6 +10,7 @@ public abstract class MazeBox implements Vertex{
 	private int x;
 	private int y;
 	private String label;
+	private Color color;
 	
 	public int getX() {
 		return x;
@@ -15,15 +18,19 @@ public abstract class MazeBox implements Vertex{
 	public int getY() {
 		return y;
 	}
+	public Color getColor() {
+		return color;
+	}
 	public final String getLabel() {
 		return this.label;
 	}
 	public abstract boolean isWalkable();
-	public MazeBox(Maze maze, int x, int y, String label) {
+	public MazeBox(Maze maze, int x, int y, String label, Color color) {
 		this.maze = maze;
 		this.x = x;
 		this.y = y;
 		this.label = label;
+		this.color = color;
 
 	}
 	

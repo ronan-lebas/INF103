@@ -28,15 +28,15 @@ public class Panel extends JPanel {
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
                 switch((maze.getBoxes()[i][j]).getLabel()) {
-                    case "W": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, Color.GREEN); break;
-                    case "E": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, Color.RED); break;
-                    case "A": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, Color.YELLOW); break;
-                    case "D": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, Color.BLUE); break;
+                    case "W": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, maze.getBoxes()[i][j].getColor()); break;
+                    case "E": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, maze.getBoxes()[i][j].getColor()); break;
+                    case "A": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, maze.getBoxes()[i][j].getColor()); break;
+                    case "D": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, maze.getBoxes()[i][j].getColor()); break;
                 }
         }
     }
 
-        setBackground(Color.black);
+        setBackground(Color.GRAY);
         setLayout(new BorderLayout());
         int n = 2*d*maze.getWidth() + 2*border;
         int m = 2*d*maze.getHeight() + (int) (1.5*border);
