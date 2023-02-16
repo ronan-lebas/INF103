@@ -14,6 +14,7 @@ import maze.*;
 
 public class GUI extends JFrame {
     private Maze maze;
+    public Maze getMaze(){return maze;}
     private Panel panel;
     private boolean modeSelected;
     public Panel getPanel(){return panel;}
