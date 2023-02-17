@@ -21,6 +21,18 @@ public class Maze implements Graph{
 	public ArrivalBox getArrivalBox() {return arrivalBox;}
 
 
+	//this part is for the GUI part
+	private Hexagon[][] hexagonList;
+    public Hexagon[][] getHexagonList(){return hexagonList;}
+	public Hexagon getHexagon(int i, int j){return hexagonList[i][j];}
+    private final int d = 50;
+    private final int border = 2*d;
+    private final int origin = border + d/5;
+	public int getD(){return d;}
+	public int getBorder(){return border;}
+	public int getOrigin(){return origin;}
+	//end of GUI part
+
 	private boolean isInMaze(int i, int j) {
 		if (i>-1 && i < width && j > -1 && j < height) {return true;}
 		return false;
@@ -96,7 +108,17 @@ public class Maze implements Graph{
 					}		
 				}
 			}
-		
+			//this part creates the list of polygons to save to then detect click
+			for(int i = 0; i < this.getWidth(); i++) {
+				for(int j = 0; j < this.getHeight(); j++) {
+					switch((this.getBoxes()[i][j]).getLabel()) {
+						case "W": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
+						case "E": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
+						case "A": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
+						case "D": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
+					}
+				}
+			}
 	}
 	
 	public final void saveToTextFile(String fileName) throws MazeReadingException,IOException{
@@ -132,11 +154,6 @@ public class Maze implements Graph{
 		}
 	}
 	
-	
-
-
-
-
 
 
 

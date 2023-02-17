@@ -1,4 +1,4 @@
-package ui;
+package maze;
 import java.lang.Math;
 import java.awt.*;
 public class Hexagon extends Polygon {

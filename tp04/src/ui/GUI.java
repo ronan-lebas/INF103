@@ -23,7 +23,7 @@ public class GUI extends JFrame {
         this.maze = new Maze();
         load();
         this.modeSelected = false;
-        Panel panel = new Panel(this,maze);
+        Panel panel = new Panel(this);
         this.panel = panel;
         setContentPane(panel);
         
@@ -96,7 +96,7 @@ public class GUI extends JFrame {
         System.out.println("X : "+ x +", Y : "+ y + ", click gauche : "+isLeftClick);
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
-                if(getPanel().getHexagonList()[i][j].contains(x,y)){
+                if(maze.getHexagonList()[i][j].contains(x,y)){
                     selectedBox = maze.getBoxes(i,j);
                 }
             }
