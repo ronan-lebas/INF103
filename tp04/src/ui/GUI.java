@@ -107,7 +107,7 @@ public class GUI extends JFrame {
             }
             else{changeBox(selectedBox.getX(), selectedBox.getY(), "W");}
         }
-        getPanel().repaint();
+        repaint();
     }
 
     public static void main(String[] args) {
