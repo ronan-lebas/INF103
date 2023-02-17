@@ -38,6 +38,9 @@ public class Panel extends JPanel {
         getGUI().getMaze().paintHexagons(g2);
 
      }
+     public void notifyForUpdate(){
+         repaint();
+     }
     
     public void repaintHexagon(Graphics g, int i, int j, Color color) {
         g.setColor(color);

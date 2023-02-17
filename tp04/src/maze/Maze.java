@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import graph.*;
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.event.*;
 
 public class Maze implements Graph{
 	private int height;// = boxes[0].length;
@@ -156,7 +157,7 @@ public class Maze implements Graph{
 				break;
 		}
 	}
-	
+	//handle gui
 	public void paintHexagons(Graphics2D g) {
 		for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {
@@ -164,8 +165,18 @@ public class Maze implements Graph{
             }
         }
 	}
+	private final ArrayList<ChangeListener> listeners = new ArrayList<ChangeListener>() ;
 
-
+	public void addObserver(ChangeListener listener) {
+   	listeners.add(listener) ;
+}
+	public void stateChanged() {
+		ChangeEvent evt = new ChangeEvent(this) ;
+	
+		for (ChangeListener listener : listeners) {
+	   	listener.stateChanged(evt);
+		}
+ 	}
 
 
 

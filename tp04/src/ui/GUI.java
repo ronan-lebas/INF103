@@ -7,12 +7,13 @@ import java.io.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.event.*;
 
 import graph.*;
 import maze.*;
 
 
-public class GUI extends JFrame {
+public class GUI extends JFrame implements ChangeListener{
     private Maze maze;
     public Maze getMaze(){return maze;}
     private Panel panel;
@@ -49,7 +50,7 @@ public class GUI extends JFrame {
 
 
 
-
+        maze.addObserver(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
@@ -108,9 +109,14 @@ public class GUI extends JFrame {
             }
             else{changeBox(selectedBox.getX(), selectedBox.getY(), "W");}
         }
-        repaint();
+        
     }
 
+
+
+    public void stateChanged(ChangeEvent evt) {
+        panel.notifyForUpdate();
+    }
     public static void main(String[] args) {
 	
 		GUI gui = new GUI();
