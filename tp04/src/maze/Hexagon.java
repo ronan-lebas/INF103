@@ -12,6 +12,10 @@ public class Hexagon extends Polygon {
         return color;
     }
     
+    public void paint(Graphics2D g) {
+        g.setColor(color);
+        g.fillPolygon(this);
+    }
     public Hexagon(int x, int y, int d, Color color) {
         npoints = 6;
         this.x = x;

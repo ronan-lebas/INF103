@@ -160,8 +160,7 @@ public class Maze implements Graph{
 	public void paintHexagons(Graphics2D g) {
 		for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {
-                g.setColor(getHexagon(i,j).getColor());
-                g.fillPolygon(getHexagon(i,j));
+				hexagonList[i][j].paint(g);
             }
         }
 	}
