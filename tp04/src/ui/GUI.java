@@ -14,6 +14,7 @@ import maze.*;
 
 public class GUI extends JFrame {
     private Maze maze;
+    public Maze getMaze(){return maze;}
     private Panel panel;
     private boolean modeSelected;
     public Panel getPanel(){return panel;}
@@ -60,7 +61,7 @@ public class GUI extends JFrame {
     public void load(){
 		System.out.println("LOAD"); 
 		try {
-			maze.initFromTextFile("C:/Users/ronan/Documents/Telecom/1A/INF/INF103/projet/tp04/data/current_lab.maze");
+			maze.initFromTextFile("tp04/data/current_lab.maze");
 		} 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
@@ -70,7 +71,7 @@ public class GUI extends JFrame {
 	public void save(){
 		System.out.println("SAVE"); 
 		try {
-			maze.saveToTextFile("C:/Users/ronan/Documents/Telecom/1A/INF/INF103/projet/tp04/data/saved_lab.maze");
+			maze.saveToTextFile("tp04/data/saved_lab.maze");
 		} 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
