@@ -109,6 +109,7 @@ public class Maze implements Graph{
 				}
 			}
 			//this part creates the list of polygons to save to then detect click
+			hexagonList = new Hexagon[width][height];
 			for(int i = 0; i < this.getWidth(); i++) {
 				for(int j = 0; j < this.getHeight(); j++) {
 					switch((this.getBoxes()[i][j]).getLabel()) {
