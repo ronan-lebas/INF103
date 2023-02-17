@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import graph.*;
+import javax.swing.*;
+import java.awt.*;
 
 public class Maze implements Graph{
 	private int height;// = boxes[0].length;
@@ -155,6 +157,14 @@ public class Maze implements Graph{
 		}
 	}
 	
+	public void paintHexagons(Graphics2D g) {
+		for(int i = 0; i < width; i++) {
+            for(int j = 0; j < height; j++) {
+                g.setColor(getHexagon(i,j).getColor());
+                g.fillPolygon(getHexagon(i,j));
+            }
+        }
+	}
 
 
 
