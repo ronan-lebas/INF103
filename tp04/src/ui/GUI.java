@@ -105,9 +105,14 @@ public class GUI extends JFrame implements ChangeListener{
         if(isLeftClick){
             if(selectedBox.getLabel() == "E"){
                 changeBox(selectedBox.getX(), selectedBox.getY(), "W");
-                System.out.println("SELECTED BOX : "+selectedBox.getLabel());
+                //System.out.println("SELECTED BOX : "+selectedBox.getLabel());
             }
-            else{changeBox(selectedBox.getX(), selectedBox.getY(), "W");}
+            else{changeBox(selectedBox.getX(), selectedBox.getY(), "E");}
+        }
+        else{
+            if(selectedBox.getLabel() == "E"){changeBox(selectedBox.getX(), selectedBox.getY(), "A");}
+            if(selectedBox.getLabel() == "W"){changeBox(selectedBox.getX(), selectedBox.getY(), "D");}
+            else{changeBox(selectedBox.getX(), selectedBox.getY(), "E");}
         }      
     }
 

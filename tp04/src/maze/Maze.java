@@ -134,13 +134,13 @@ public class Maze implements Graph{
 				boxes[i][j] = new EmptyBox(this, i, j);
 				break;
 			case "A" :
+				updateBox(arrivalBox.getX(),arrivalBox.getY(),"E");	
 				boxes[i][j] = new ArrivalBox(this, i, j);
-				updateBox(arrivalBox.getX(),arrivalBox.getY(),"E");
 				arrivalBox = (ArrivalBox) boxes[i][j];
 				break;
 			case "D" :
-				boxes[i][j] = new DepartureBox(this, i, j);
 				updateBox(departureBox.getX(),departureBox.getY(),"E");
+				boxes[i][j] = new DepartureBox(this, i, j);
 				departureBox = (DepartureBox) boxes[i][j];
 				break;
 			case "W" :
