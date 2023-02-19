@@ -90,7 +90,7 @@ public class Maze implements Graph{
 			for (int j=0; j<height; j++) {
 				if (lines.get(j).length() != width) throw new MazeReadingException(fileName,j+1,"Le nombre de cases par ligne n'est pas constant.");
 				for (int i=0; i<width; i++) {
-					//remplit boxes
+					//fill boxes
 					switch(""+lines.get(j).charAt(i)){
 						case "E": 
 							boxes[i][j] = new EmptyBox(this,i,j);
@@ -112,17 +112,8 @@ public class Maze implements Graph{
 				}
 			}
 			//this part creates the list of polygons to save to then detect click
-			hexagonList = new Hexagon[width][height];
-			for(int i = 0; i < this.getWidth(); i++) {
-				for(int j = 0; j < this.getHeight(); j++) {
-					switch((this.getBoxes()[i][j]).getLabel()) {
-						case "W": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
-						case "E": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
-						case "A": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
-						case "D": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
-					}
-				}
-			}
+			fillHexagonsList();
+			
 	}
 	
 	public final void saveToTextFile(String fileName) throws MazeReadingException,IOException{
@@ -156,8 +147,25 @@ public class Maze implements Graph{
 				boxes[i][j] = new WallBox(this, i, j);
 				break;
 		}
+		fillHexagonsList();
+		stateChanged();
 	}
 	//handle gui
+
+	public void fillHexagonsList(){
+		hexagonList = new Hexagon[width][height];
+		for(int i = 0; i < this.getWidth(); i++) {
+			for(int j = 0; j < this.getHeight(); j++) {
+				switch((this.getBoxes()[i][j]).getLabel()) {
+					case "W": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
+					case "E": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
+					case "A": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
+					case "D": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
+				}
+			}
+		}
+	}
+
 	public void paintHexagons(Graphics2D g) {
 		for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {

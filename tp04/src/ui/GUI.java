@@ -108,8 +108,7 @@ public class GUI extends JFrame implements ChangeListener{
                 System.out.println("SELECTED BOX : "+selectedBox.getLabel());
             }
             else{changeBox(selectedBox.getX(), selectedBox.getY(), "W");}
-        }
-        
+        }      
     }
 
 
