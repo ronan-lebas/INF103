@@ -93,6 +93,7 @@ public class GUI extends JFrame implements ChangeListener{
     }
 
     public void click(int x, int y, boolean isLeftClick){
+        System.out.println(getMaze().getMousePressed());
         MazeBox selectedBox = null;
         System.out.println("X : "+ x +", Y : "+ y + ", click gauche : "+isLeftClick);
         for(int i = 0; i < maze.getWidth(); i++) {
@@ -105,16 +106,12 @@ public class GUI extends JFrame implements ChangeListener{
         if(isLeftClick){
             if(selectedBox.getLabel() == "E"){
                 changeBox(selectedBox.getX(), selectedBox.getY(), "W");
-                //System.out.println("SELECTED BOX : "+selectedBox.getLabel());
             }
-            else{changeBox(selectedBox.getX(), selectedBox.getY(), "E");}
+            if(selectedBox.getLabel() == "W"){
+                changeBox(selectedBox.getX(), selectedBox.getY(), "E");
+            }
         }
-        else{
-            if(selectedBox.getLabel() == "E"){changeBox(selectedBox.getX(), selectedBox.getY(), "A");}
-            if(selectedBox.getLabel() == "W"){changeBox(selectedBox.getX(), selectedBox.getY(), "D");}
-            else{changeBox(selectedBox.getX(), selectedBox.getY(), "E");}
-        }      
-    }
+        }
 
 
 

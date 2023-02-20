@@ -29,6 +29,7 @@ public class Panel extends JPanel {
         add(buttons,BorderLayout.SOUTH);
         repaint();
         addMouseListener(new MouseDetector(this));
+        addMouseMotionListener(new MouseDetector(this));
     }
     @Override
     protected void paintComponent(Graphics g){
@@ -42,7 +43,7 @@ public class Panel extends JPanel {
          repaint();
      }
     
-    public void repaintHexagon(Graphics g, int i, int j, Color color) {
+     public void repaintHexagon(Graphics g, int i, int j, Color color) {
         g.setColor(color);
         g.fillPolygon(getGUI().getMaze().getHexagonList()[i][j]);
     }

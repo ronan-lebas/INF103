@@ -131,7 +131,7 @@ public class Maze implements Graph{
 	public final void updateBox(int i, int j, String newType){
 		switch(newType){
 			case "E" :
-				boxes[i][j] = new EmptyBox(this, i, j);
+				if(boxes[i][j].getLabel() != "A" && boxes[i][j].getLabel() != "D") boxes[i][j] = new EmptyBox(this, i, j);
 				break;
 			case "A" :
 				updateBox(arrivalBox.getX(),arrivalBox.getY(),"E");	
@@ -151,6 +151,9 @@ public class Maze implements Graph{
 		stateChanged();
 	}
 	//handle gui
+	private boolean mousePressed = false;
+	public void setMousePressed(boolean b) {mousePressed = b;}
+	public boolean getMousePressed() {return mousePressed;}
 
 	public void fillHexagonsList(){
 		hexagonList = new Hexagon[width][height];
