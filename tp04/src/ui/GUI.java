@@ -134,7 +134,7 @@ public class GUI extends JFrame implements ChangeListener{
                     maze.setCurrentDragChange("D");
                 }
                 if(selectedBox.getLabel() == "A" && maze.getCurrentDragChange() == "N"){
-                    changeBox(i, j, "E");
+                    changeBox(i, j, "A");
                     maze.setCurrentDragChange("A");
                 }
             }
