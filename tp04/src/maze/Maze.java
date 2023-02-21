@@ -151,10 +151,13 @@ public class Maze implements Graph{
 		stateChanged();
 	}
 	//handle gui
-	private boolean mousePressed = false;
-	public void setMousePressed(boolean b) {mousePressed = b;}
-	public boolean getMousePressed() {return mousePressed;}
-
+	private String currentDragChange = "N";
+	public String getCurrentDragChange() {
+		return currentDragChange;
+	}
+	public void setCurrentDragChange(String currentDragChange) {
+		this.currentDragChange = currentDragChange;
+	}
 	public void fillHexagonsList(){
 		hexagonList = new Hexagon[width][height];
 		for(int i = 0; i < this.getWidth(); i++) {

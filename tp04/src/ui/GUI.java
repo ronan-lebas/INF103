@@ -92,26 +92,47 @@ public class GUI extends JFrame implements ChangeListener{
         maze.updateBox(i, j, newType);
     }
 
-    public void click(int x, int y, boolean isLeftClick){
-        System.out.println(getMaze().getMousePressed());
-        MazeBox selectedBox = null;
-        System.out.println("X : "+ x +", Y : "+ y + ", click gauche : "+isLeftClick);
+    //deselect all boxes if called by mouseReleased
+    public void deselectAllBoxes(){
+        maze.setCurrentDragChange("N");
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
-                if(maze.getHexagonList()[i][j].contains(x,y)){
+                maze.getBoxes(i,j).setSelected(false);
+            }
+        }
+    }
+    public void click(int x, int y, boolean isLeftClick){
+        //System.out.println("X : "+ selectedBox.getX() +", Y : "+ selectedBox.getY() + ", click gauche : "+isLeftClick +", selecte ? "+ selectedBox.isSelected());
+
+        //this part finds the selected box
+        MazeBox selectedBox = null;
+        for(int i = 0; i < maze.getWidth(); i++) {
+            for(int j = 0; j < maze.getHeight(); j++) {
+                if(maze.getHexagon(i,j).contains(x,y)){
                     selectedBox = maze.getBoxes(i,j);
                 }
+                else{maze.getBoxes(i,j).setSelected(false);}
             }
         }
-        if(isLeftClick){
-            if(selectedBox.getLabel() == "E"){
-                changeBox(selectedBox.getX(), selectedBox.getY(), "W");
+        //this part changes the type of the selected box
+        if(selectedBox != null && selectedBox.isSelected() == false){
+            int i = selectedBox.getX();
+            int j = selectedBox.getY();
+            if(isLeftClick){
+                if(maze.getCurrentDragChange() != "N" && (selectedBox.getLabel() == "E" || selectedBox.getLabel() == "W")){changeBox(i,j,maze.getCurrentDragChange());}
+                if(selectedBox.getLabel() == "E" && maze.getCurrentDragChange() == "N"){
+                    changeBox(i, j, "W");
+                    maze.setCurrentDragChange("W");
+                }
+                if(selectedBox.getLabel() == "W" && maze.getCurrentDragChange() == "N"){
+                    changeBox(i, j, "E");
+                    maze.setCurrentDragChange("E");
+                }
             }
-            if(selectedBox.getLabel() == "W"){
-                changeBox(selectedBox.getX(), selectedBox.getY(), "E");
-            }
+            maze.getBoxes(i,j).setSelected(true);
         }
-        }
+        
+    }
 
 
 
