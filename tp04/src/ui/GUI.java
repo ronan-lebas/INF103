@@ -84,7 +84,7 @@ public class GUI extends JFrame implements ChangeListener{
 		ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
 		for (Vertex vertex : shortestPath) {
             System.out.println("X : "+((MazeBox) vertex).getX()+", Y : "+((MazeBox) vertex).getY());
-            getPanel().repaintHexagon(getPanel().getGraphics(), ((MazeBox) vertex).getX(),((MazeBox) vertex).getY(), Color.CYAN);
+            getMaze().getHexagon(((MazeBox) vertex).getX(), ((MazeBox) vertex).getY()).paint((Graphics2D) getPanel().getGraphics(),Color.CYAN);
         }
 	}
 

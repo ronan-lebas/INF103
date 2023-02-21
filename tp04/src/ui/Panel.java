@@ -42,10 +42,5 @@ public class Panel extends JPanel {
      public void notifyForUpdate(){
          repaint();
      }
-    
-     public void repaintHexagon(Graphics g, int i, int j, Color color) {
-        g.setColor(color);
-        g.fillPolygon(getGUI().getMaze().getHexagonList()[i][j]);
-    }
 
 }
