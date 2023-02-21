@@ -82,9 +82,9 @@ public class GUI extends JFrame implements ChangeListener{
 	public void solve(){
 		ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
 		ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
-		for (Vertex vertex : shortestPath) {
-            System.out.println("X : "+((MazeBox) vertex).getX()+", Y : "+((MazeBox) vertex).getY());
-            getMaze().getHexagon(((MazeBox) vertex).getX(), ((MazeBox) vertex).getY()).paint((Graphics2D) getPanel().getGraphics(),Color.CYAN);
+		for (int i = 1; i < shortestPath.size() - 1; i++) {
+            System.out.println("X : "+((MazeBox) shortestPath.get(i)).getX()+", Y : "+((MazeBox) shortestPath.get(i)).getY());
+            getMaze().getHexagon(((MazeBox) shortestPath.get(i)).getX(), ((MazeBox) shortestPath.get(i)).getY()).paint((Graphics2D) getPanel().getGraphics(),Color.CYAN);
         }
 	}
 
