@@ -92,14 +92,14 @@ public class GUI extends JFrame implements ChangeListener{
         maze.updateBox(i, j, newType);
     }
 
-    //deselect all boxes if called by mouseReleased
-    public void deselectAllBoxes(){
-        maze.setCurrentDragChange("N");
+    //deselect all boxes if called by the mouseDetector and compute the new placement of arrival or departure boxes if necessary
+    public void mouseReleased(int x, int y){
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
                 maze.getBoxes(i,j).setSelected(false);
             }
         }
+        maze.setCurrentDragChange("N");
     }
     public void click(int x, int y, boolean isLeftClick){
         //System.out.println("X : "+ selectedBox.getX() +", Y : "+ selectedBox.getY() + ", click gauche : "+isLeftClick +", selecte ? "+ selectedBox.isSelected());
@@ -120,6 +120,7 @@ public class GUI extends JFrame implements ChangeListener{
             int j = selectedBox.getY();
             if(isLeftClick){
                 if(maze.getCurrentDragChange() != "N" && (selectedBox.getLabel() == "E" || selectedBox.getLabel() == "W")){changeBox(i,j,maze.getCurrentDragChange());}
+                
                 if(selectedBox.getLabel() == "E" && maze.getCurrentDragChange() == "N"){
                     changeBox(i, j, "W");
                     maze.setCurrentDragChange("W");
@@ -127,6 +128,14 @@ public class GUI extends JFrame implements ChangeListener{
                 if(selectedBox.getLabel() == "W" && maze.getCurrentDragChange() == "N"){
                     changeBox(i, j, "E");
                     maze.setCurrentDragChange("E");
+                }
+                if(selectedBox.getLabel() == "D" && maze.getCurrentDragChange() == "N"){
+                    changeBox(i, j, "D");
+                    maze.setCurrentDragChange("D");
+                }
+                if(selectedBox.getLabel() == "A" && maze.getCurrentDragChange() == "N"){
+                    changeBox(i, j, "E");
+                    maze.setCurrentDragChange("A");
                 }
             }
             maze.getBoxes(i,j).setSelected(true);

@@ -131,7 +131,7 @@ public class Maze implements Graph{
 	public final void updateBox(int i, int j, String newType){
 		switch(newType){
 			case "E" :
-				if(boxes[i][j].getLabel() != "A" && boxes[i][j].getLabel() != "D") boxes[i][j] = new EmptyBox(this, i, j);
+				boxes[i][j] = new EmptyBox(this, i, j);
 				break;
 			case "A" :
 				updateBox(arrivalBox.getX(),arrivalBox.getY(),"E");	
