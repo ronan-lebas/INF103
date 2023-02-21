@@ -111,7 +111,7 @@ public class Maze implements Graph{
 					}		
 				}
 			}
-			//this part creates the list of polygons to save to then detect click
+			//this line creates the list of polygons to save to then detect click
 			fillHexagonsList();
 			
 	}
@@ -131,20 +131,20 @@ public class Maze implements Graph{
 	public final void updateBox(int i, int j, String newType){
 		switch(newType){
 			case "E" :
-				boxes[i][j] = new EmptyBox(this, i, j);
+				boxes[i][j] = new EmptyBox(this, i, j,boxes[i][j].getLabel());
 				break;
 			case "A" :
-				updateBox(arrivalBox.getX(),arrivalBox.getY(),"E");	
-				boxes[i][j] = new ArrivalBox(this, i, j);
+				updateBox(arrivalBox.getX(),arrivalBox.getY(), arrivalBox.getFormerLabel());	
+				boxes[i][j] = new ArrivalBox(this, i, j ,boxes[i][j].getLabel());
 				arrivalBox = (ArrivalBox) boxes[i][j];
 				break;
 			case "D" :
-				updateBox(departureBox.getX(),departureBox.getY(),"E");
-				boxes[i][j] = new DepartureBox(this, i, j);
+				updateBox(departureBox.getX(),departureBox.getY(), departureBox.getFormerLabel());
+				boxes[i][j] = new DepartureBox(this, i, j,boxes[i][j].getLabel());
 				departureBox = (DepartureBox) boxes[i][j];
 				break;
 			case "W" :
-				boxes[i][j] = new WallBox(this, i, j);
+				boxes[i][j] = new WallBox(this, i, j,boxes[i][j].getLabel());
 				break;
 		}
 		fillHexagonsList();

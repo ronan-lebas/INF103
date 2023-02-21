@@ -10,6 +10,9 @@ public abstract class MazeBox implements Vertex{
 	private int x;
 	private int y;
 	private String label;
+	private String formerLabel;
+	public String getFormerLabel() {return formerLabel;}
+	public void setFormerLabel(String formerLabel) {this.formerLabel = formerLabel;}
 	private Color color;
 	private boolean selected;
     public boolean isSelected() {return selected;}
@@ -28,11 +31,12 @@ public abstract class MazeBox implements Vertex{
 		return this.label;
 	}
 	public abstract boolean isWalkable();
-	public MazeBox(Maze maze, int x, int y, String label, Color color) {
+	public MazeBox(Maze maze, int x, int y, String label, String formerLabel, Color color) {
 		this.maze = maze;
 		this.x = x;
 		this.y = y;
 		this.label = label;
+		this.formerLabel = formerLabel;
 		this.color = color;
 
 	}
