@@ -17,36 +17,27 @@ public class GUI extends JFrame implements ChangeListener{
     private Maze maze;
     public Maze getMaze(){return maze;}
     private Panel panel;
-    private boolean modeSelected;
     public Panel getPanel(){return panel;}
     public GUI() {
         super("Labyrinthe");
         this.maze = new Maze();
         load();
-        this.modeSelected = false;
         Panel panel = new Panel(this);
         this.panel = panel;
         setContentPane(panel);
         
         JMenuBar menuBar = new JMenuBar();
-        JMenu file = new JMenu("File");
-        JMenu mode = new JMenu("Mode");
         JMenuItem load = new JMenuItem("Load");
         JMenuItem save = new JMenuItem("Save");
-        JMenuItem solve = new JMenuItem("Solve");
-        JMenuItem edit = new JMenuItem("Edit");
+        JMenuItem newMaze = new JMenuItem("New");
         setJMenuBar(menuBar);
-        menuBar.add(file);
-        menuBar.add(mode);
-        file.add(load);
-        file.add(save);
-        mode.add(solve);
-        mode.add(edit);
+        menuBar.add(newMaze);
+        menuBar.add(load);
+        menuBar.add(save);
 
+        newMaze.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {newMaze();}} );
         load.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {load();}} );
-        save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {save();}} );
-        solve.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {modeSelected = false;}} );
-        edit.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {modeSelected = true;}} );        
+        save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {save();}} );    
 
 
 
@@ -59,6 +50,14 @@ public class GUI extends JFrame implements ChangeListener{
     }
 
 
+    public void newMaze(){
+        String newHeight = JOptionPane.showInputDialog(this,"New height ?", 1);
+        String newWidth = JOptionPane.showInputDialog(this,"New width ?", 1);
+        System.out.println("NEW MAZE : "+newHeight+" "+newWidth);
+        maze = new Maze(Integer.parseInt(newHeight), Integer.parseInt(newWidth));
+        maze.addObserver(this);
+        maze.stateChanged();
+    }
     public void load(){
 		System.out.println("LOAD"); 
 		try {

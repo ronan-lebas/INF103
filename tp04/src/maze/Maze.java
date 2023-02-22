@@ -150,7 +150,7 @@ public class Maze implements Graph{
 		fillHexagonsList();
 		stateChanged();
 	}
-	//handle gui
+	//handle gui (the maze is the model)
 	private String currentDragChange = "N";
 	public String getCurrentDragChange() {
 		return currentDragChange;
@@ -179,6 +179,9 @@ public class Maze implements Graph{
             }
         }
 	}
+	public void paintSolution(){
+
+	}
 	private final ArrayList<ChangeListener> listeners = new ArrayList<ChangeListener>() ;
 
 	public void addObserver(ChangeListener listener) {
@@ -192,7 +195,23 @@ public class Maze implements Graph{
 		}
  	}
 
-
+	public Maze(int height, int width) {
+		this.height = height;
+		this.width = width;
+		boxes = new MazeBox[width][height];
+		for (int i=0; i<width; i++) {
+			for (int j=0; j<height; j++) {
+				boxes[i][j] = new EmptyBox(this,i,j);
+			}
+		}
+		boxes[0][0] = new DepartureBox(this,0,0);
+		boxes[width-1][height-1] = new ArrivalBox(this,width-1,height-1);
+		this.departureBox = (DepartureBox) boxes[0][0];
+		arrivalBox = (ArrivalBox) boxes[width-1][height-1];
+		//this line creates the list of polygons to save to then detect click
+		fillHexagonsList();
+	}
+	public Maze(){}
 
 
 	
