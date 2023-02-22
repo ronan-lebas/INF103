@@ -1,6 +1,7 @@
 package maze;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import graph.*;
@@ -13,6 +14,8 @@ public class Maze implements Graph{
 	private int width;// = boxes.length;
 	private final String defaultPath = "tp04/data/current_lab.maze";
 	public String getDefaultPath(){return defaultPath;}
+	private final String defaultDirectory = "./tp04/data";
+	public String getDefaultDirectory(){return defaultDirectory;}
 	public int getHeight(){return height;}
 	public int getWidth(){return width;}
 	private MazeBox[][] boxes;
@@ -81,11 +84,12 @@ public class Maze implements Graph{
 		return -1;		
 	}
 	
-	public final void initFromTextFile(String fileName) throws MazeReadingException, IOException {
+	public final void initFromTextFile(String fileName) throws MazeReadingException, IOException, NoSuchFileException, MazeSizeException {
 		
 			ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
 			height = lines.size();
 			width = lines.get(0).length();
+			if(height*width < 2) throw new MazeSizeException();
 			setGUIValues();
 			boxes = new MazeBox[width][height];
 			boolean hasDeparture = false;

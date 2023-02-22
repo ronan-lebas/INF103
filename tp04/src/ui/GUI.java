@@ -4,6 +4,7 @@ package ui;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -43,19 +44,34 @@ public class GUI extends JFrame implements ChangeListener{
 
         load.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {
             String path;
-            explorer.setCurrentDirectory(new File("./tp04/data"));
+            explorer.setCurrentDirectory(new File(maze.getDefaultDirectory()));
             explorer.setDialogTitle("Choose a maze :");
             explorer.setAcceptAllFileFilterUsed(false);
             explorer.addChoosableFileFilter(new FileNameExtensionFilter("Maze", "maze"));
             explorer.showOpenDialog(null);
-            path = explorer.getSelectedFile().getAbsolutePath();
+            try{
+                path = explorer.getSelectedFile().getAbsolutePath();
+                load(path);
+            }
+            catch(Exception e){}
 
 
 
-
-            load(path);
         }} );
-        save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {save(maze.getDefaultPath());}} );    
+        save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {
+            String path;
+            explorer.setCurrentDirectory(new File(maze.getDefaultDirectory()));
+            explorer.setDialogTitle("Choose a maze :");
+            explorer.setAcceptAllFileFilterUsed(false);
+            explorer.addChoosableFileFilter(new FileNameExtensionFilter("Maze", "maze"));
+            explorer.showOpenDialog(null);
+            try{
+                path = explorer.getSelectedFile().getAbsolutePath();
+                load(path);
+            }
+            catch(Exception e){}
+            //save(maze.getDefaultPath());
+        }} );    
 
 
 
@@ -124,7 +140,9 @@ public class GUI extends JFrame implements ChangeListener{
             setContentPane(panel);
             pack();
         } 
-		catch (MazeReadingException ex) {} 
+		catch(NoSuchFileException e){}
+        catch (MazeSizeException ex) {} 
+        catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
 			ex.printStackTrace();
 		}
