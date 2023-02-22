@@ -14,7 +14,7 @@ public class Maze implements Graph{
 	private int width;// = boxes.length;
 	private final String defaultPath = "tp04/data/default.maze";
 	public String getDefaultPath(){return defaultPath;}
-	private final String defaultDirectory = "./tp04/data";
+	private final String defaultDirectory = "./tp04/data/";
 	public String getDefaultDirectory(){return defaultDirectory;}
 	public int getHeight(){return height;}
 	public int getWidth(){return width;}
