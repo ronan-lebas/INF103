@@ -42,7 +42,31 @@ public class GUI extends JFrame implements ChangeListener{
 
 
         maze.addObserver(this);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if(maze.isEdited() == true){
+                    int choice = JOptionPane.showConfirmDialog(null, "Do you want to save before exiting ?");
+                if (choice == JOptionPane.YES_OPTION) {
+                    save();
+                    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } 
+                if (choice == JOptionPane.NO_OPTION) {
+                    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                }
+                if (choice == JOptionPane.CANCEL_OPTION) {
+                    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                }
+            }
+            else {setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);}
+                }
+        });
+
+        
+        
         pack();
         setVisible(true);
         setResizable(false);

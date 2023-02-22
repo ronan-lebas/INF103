@@ -153,6 +153,13 @@ public class Maze implements Graph{
 	}
 	//handle gui (the maze is the model)
 	private String currentDragChange = "N";
+	private boolean edited = false;
+	public boolean isEdited() {
+		return edited;
+	}
+	public void setEdited(boolean edited) {
+		this.edited = edited;
+	}
 	public String getCurrentDragChange() {
 		return currentDragChange;
 	}
@@ -180,15 +187,13 @@ public class Maze implements Graph{
             }
         }
 	}
-	public void paintSolution(){
-
-	}
 	private final ArrayList<ChangeListener> listeners = new ArrayList<ChangeListener>() ;
 
 	public void addObserver(ChangeListener listener) {
    	listeners.add(listener) ;
 }
 	public void stateChanged() {
+		edited = true;
 		ChangeEvent evt = new ChangeEvent(this) ;
 	
 		for (ChangeListener listener : listeners) {
