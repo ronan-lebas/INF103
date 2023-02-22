@@ -120,6 +120,7 @@ public class Maze implements Graph{
 			}
 			//this line creates the list of polygons to save to then detect click
 			fillHexagonsList();
+			edited = false;
 			
 	}
 	

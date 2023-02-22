@@ -111,6 +111,20 @@ public class GUI extends JFrame implements ChangeListener{
 
 
     public void newMaze(){
+        if(maze.isEdited() == true){
+            int choice = JOptionPane.showConfirmDialog(null, "Do you want to save before creating a new maze ?");
+        if (choice == JOptionPane.YES_OPTION) {
+            String name = JOptionPane.showInputDialog(null,"Enter the name of the maze", "default");
+            save(maze.getDefaultDirectory()+name+".maze");
+        } 
+        if (choice == JOptionPane.NO_OPTION) {
+        }
+        if (choice == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+        }
+        
+        
         try{
             String newHeight = JOptionPane.showInputDialog(this,"New height ?", 2);
             String newWidth = JOptionPane.showInputDialog(this,"New width ?", 2);
@@ -119,7 +133,6 @@ public class GUI extends JFrame implements ChangeListener{
             if(height*width < 2) throw new MazeSizeException();
             maze = new Maze(height, width);
             maze.addObserver(this);
-            maze.stateChanged();
             panel = new Panel(this);
             setContentPane(panel);
             pack();
@@ -131,8 +144,26 @@ public class GUI extends JFrame implements ChangeListener{
             JOptionPane.showMessageDialog(this, "Please enter numbers greater than 1", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    
+    
+    
     public void load(final String path){
-		System.out.println("LOAD"); 
+		if(maze.isEdited() == true){
+            int choice = JOptionPane.showConfirmDialog(null, "Do you want to save before loading a new maze ?");
+        if (choice == JOptionPane.YES_OPTION) {
+            String name = JOptionPane.showInputDialog(null,"Enter the name of the maze", "default");
+            save(maze.getDefaultDirectory()+name+".maze");
+        } 
+        if (choice == JOptionPane.NO_OPTION) {
+        }
+        if (choice == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+        }
+        
+        
+        System.out.println("LOAD"); 
 		try {
 			maze.initFromTextFile(path);
             panel = new Panel(this);
