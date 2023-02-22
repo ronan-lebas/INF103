@@ -28,9 +28,9 @@ public class Maze implements Graph{
 	private Hexagon[][] hexagonList;
     public Hexagon[][] getHexagonList(){return hexagonList;}
 	public Hexagon getHexagon(int i, int j){return hexagonList[i][j];}
-    private final int d = 50;
-    private final int border = 2*d;
-    private final int origin = border + d/5;
+    private int d;
+	private int border;
+	private int origin;
 	public int getD(){return d;}
 	public int getBorder(){return border;}
 	public int getOrigin(){return origin;}
@@ -84,6 +84,7 @@ public class Maze implements Graph{
 			ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
 			height = lines.size();
 			width = lines.get(0).length();
+			setGUIValues();
 			boxes = new MazeBox[width][height];
 			boolean hasDeparture = false;
 			boolean hasArrival = false;
@@ -198,6 +199,7 @@ public class Maze implements Graph{
 	public Maze(int height, int width) {
 		this.height = height;
 		this.width = width;
+		setGUIValues();
 		boxes = new MazeBox[width][height];
 		for (int i=0; i<width; i++) {
 			for (int j=0; j<height; j++) {
@@ -212,7 +214,15 @@ public class Maze implements Graph{
 		fillHexagonsList();
 	}
 	public Maze(){}
-
+	public void setGUIValues(){
+		//int n = 500;
+		//int m = 500;
+		//double r2 = Math.min(n / (2 * width * Math.cos(Math.PI / 6)), m / ((height + 0.5) * Math.sin(Math.PI / 6)));
+		//d = (int) Math.round(r2);
+		d = 50;
+    	border = 2*d;
+    	origin = border + d/5;
+	}
 
 	
 	

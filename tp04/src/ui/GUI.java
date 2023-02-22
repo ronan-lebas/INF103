@@ -45,6 +45,7 @@ public class GUI extends JFrame implements ChangeListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
+        setResizable(false);
 
 
     }
@@ -53,16 +54,21 @@ public class GUI extends JFrame implements ChangeListener{
     public void newMaze(){
         String newHeight = JOptionPane.showInputDialog(this,"New height ?", 1);
         String newWidth = JOptionPane.showInputDialog(this,"New width ?", 1);
-        System.out.println("NEW MAZE : "+newHeight+" "+newWidth);
         maze = new Maze(Integer.parseInt(newHeight), Integer.parseInt(newWidth));
         maze.addObserver(this);
         maze.stateChanged();
+        panel = new Panel(this);
+        setContentPane(panel);
+        pack();
     }
     public void load(){
 		System.out.println("LOAD"); 
 		try {
 			maze.initFromTextFile("tp04/data/current_lab.maze");
-		} 
+            panel = new Panel(this);
+            setContentPane(panel);
+            pack();
+        } 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
 			ex.printStackTrace();
