@@ -11,6 +11,8 @@ import javax.swing.event.*;
 public class Maze implements Graph{
 	private int height;// = boxes[0].length;
 	private int width;// = boxes.length;
+	private final String defaultPath = "tp04/data/current_lab.maze";
+	public String getDefaultPath(){return defaultPath;}
 	public int getHeight(){return height;}
 	public int getWidth(){return width;}
 	private MazeBox[][] boxes;

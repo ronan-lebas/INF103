@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import graph.*;
 import maze.*;
@@ -21,7 +22,7 @@ public class GUI extends JFrame implements ChangeListener{
     public GUI() {
         super("Labyrinthe");
         this.maze = new Maze();
-        load();
+        load(maze.getDefaultPath());
         Panel panel = new Panel(this);
         this.panel = panel;
         setContentPane(panel);
@@ -36,22 +37,41 @@ public class GUI extends JFrame implements ChangeListener{
         menuBar.add(save);
 
         newMaze.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {newMaze();}} );
-        load.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {load();}} );
-        save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {save();}} );    
+
+
+        JFileChooser explorer = new JFileChooser();
+
+        load.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {
+            String path;
+            explorer.setCurrentDirectory(new File("./tp04/data"));
+            explorer.setDialogTitle("Choose a maze :");
+            explorer.setAcceptAllFileFilterUsed(false);
+            explorer.addChoosableFileFilter(new FileNameExtensionFilter("Maze", "maze"));
+            explorer.showOpenDialog(null);
+            path = explorer.getSelectedFile().getAbsolutePath();
+
+
+
+
+            load(path);
+        }} );
+        save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {save(maze.getDefaultPath());}} );    
 
 
 
         maze.addObserver(this);
 
 
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 if(maze.isEdited() == true){
                     int choice = JOptionPane.showConfirmDialog(null, "Do you want to save before exiting ?");
                 if (choice == JOptionPane.YES_OPTION) {
-                    save();
+                    save(maze.getDefaultPath());
                     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 } 
                 if (choice == JOptionPane.NO_OPTION) {
@@ -96,10 +116,10 @@ public class GUI extends JFrame implements ChangeListener{
             JOptionPane.showMessageDialog(this, "Please enter numbers greater than 1", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void load(){
+    public void load(final String path){
 		System.out.println("LOAD"); 
 		try {
-			maze.initFromTextFile("tp04/data/current_lab.maze");
+			maze.initFromTextFile(path);
             panel = new Panel(this);
             setContentPane(panel);
             pack();
@@ -109,11 +129,11 @@ public class GUI extends JFrame implements ChangeListener{
 			ex.printStackTrace();
 		}
 	}
-	public void save(){
+	public void save(final String path){
 		System.out.println("SAVE"); 
 		try {
 			maze.setEdited(false);;
-            maze.saveToTextFile("tp04/data/current_lab.maze");
+            maze.saveToTextFile(path);
 		} 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
