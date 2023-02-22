@@ -21,7 +21,7 @@ public class GUI extends JFrame implements ChangeListener{
     private Panel panel;
     public Panel getPanel(){return panel;}
     public GUI() {
-        super("Labyrinthe");
+        super("Maze Application");
         this.maze = new Maze();
         load(maze.getDefaultPath());
         Panel panel = new Panel(this);
