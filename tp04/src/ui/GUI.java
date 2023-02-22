@@ -55,23 +55,19 @@ public class GUI extends JFrame implements ChangeListener{
                 load(path);
             }
             catch(Exception e){}
-
-
-
         }} );
         save.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {
             String path;
             explorer.setCurrentDirectory(new File(maze.getDefaultDirectory()));
-            explorer.setDialogTitle("Choose a maze :");
+            explorer.setDialogTitle("Save the maze :");
             explorer.setAcceptAllFileFilterUsed(false);
             explorer.addChoosableFileFilter(new FileNameExtensionFilter("Maze", "maze"));
-            explorer.showOpenDialog(null);
+            explorer.showSaveDialog(null);
             try{
                 path = explorer.getSelectedFile().getAbsolutePath();
-                load(path);
+                save(path);
             }
             catch(Exception e){}
-            //save(maze.getDefaultPath());
         }} );    
 
 
