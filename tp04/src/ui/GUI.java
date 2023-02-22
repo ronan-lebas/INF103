@@ -83,7 +83,7 @@ public class GUI extends JFrame implements ChangeListener{
             @Override
             public void windowClosing(WindowEvent e) {
                 if(maze.isEdited() == true){
-                    int choice = JOptionPane.showConfirmDialog(null, "Do you want to save before exiting ?");
+                    int choice = JOptionPane.showConfirmDialog(null, "Do you want to save under the name \""+ maze.getDefaultPath() +"\" before exiting ?");
                 if (choice == JOptionPane.YES_OPTION) {
                     save(maze.getDefaultPath());
                     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
