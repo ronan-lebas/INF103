@@ -27,6 +27,7 @@ public class GUI extends JFrame implements ChangeListener{
         Panel panel = new Panel(this);
         this.panel = panel;
         setContentPane(panel);
+        setLocationRelativeTo(null);
         
         JMenuBar menuBar = new JMenuBar();
         JMenuItem load = new JMenuItem("Load");
