@@ -52,14 +52,25 @@ public class GUI extends JFrame implements ChangeListener{
 
 
     public void newMaze(){
-        String newHeight = JOptionPane.showInputDialog(this,"New height ?", 1);
-        String newWidth = JOptionPane.showInputDialog(this,"New width ?", 1);
-        maze = new Maze(Integer.parseInt(newHeight), Integer.parseInt(newWidth));
-        maze.addObserver(this);
-        maze.stateChanged();
-        panel = new Panel(this);
-        setContentPane(panel);
-        pack();
+        try{
+            String newHeight = JOptionPane.showInputDialog(this,"New height ?", 2);
+            String newWidth = JOptionPane.showInputDialog(this,"New width ?", 2);
+            int height = Integer.parseInt(newHeight);
+            int width = Integer.parseInt(newWidth);
+            if(height*width < 2) throw new MazeSizeException();
+            maze = new Maze(height, width);
+            maze.addObserver(this);
+            maze.stateChanged();
+            panel = new Panel(this);
+            setContentPane(panel);
+            pack();
+        }
+        catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Please enter two numbers", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (MazeSizeException e){
+            JOptionPane.showMessageDialog(this, "Please enter numbers greater than 1", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     public void load(){
 		System.out.println("LOAD"); 

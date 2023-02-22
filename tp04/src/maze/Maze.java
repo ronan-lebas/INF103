@@ -219,8 +219,14 @@ public class Maze implements Graph{
 		//int m = 500;
 		//double r2 = Math.min(n / (2 * width * Math.cos(Math.PI / 6)), m / ((height + 0.5) * Math.sin(Math.PI / 6)));
 		//d = (int) Math.round(r2);
-		d = 50;
-    	border = 2*d;
+		/*if(Math.max(width,height) >= 7){
+			d = 300/Math.max(width,height);
+		}
+		else{d = 50;}*/
+		
+
+		d = 200/Math.max(width,height);
+		border = 2*d;
     	origin = border + d/5;
 	}
 
