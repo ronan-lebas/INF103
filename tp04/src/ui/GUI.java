@@ -50,6 +50,7 @@ public class GUI extends JFrame implements ChangeListener{
             explorer.setAcceptAllFileFilterUsed(false);
             explorer.addChoosableFileFilter(new FileNameExtensionFilter("Maze", "maze"));
             explorer.showOpenDialog(null);
+            //try catch needed to avoid exception when the explorer is close without choosing a file
             try{
                 path = explorer.getSelectedFile().getAbsolutePath();
                 load(path);
@@ -137,9 +138,9 @@ public class GUI extends JFrame implements ChangeListener{
             setContentPane(panel);
             pack();
         } 
-		catch(NoSuchFileException e){}
-        catch (MazeSizeException ex) {} 
-        catch (MazeReadingException ex) {} 
+		catch(NoSuchFileException e){JOptionPane.showMessageDialog(this, "This file doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);}
+        catch (MazeSizeException ex) {JOptionPane.showMessageDialog(this, "Please use a maze with more than 1 box", "Error", JOptionPane.ERROR_MESSAGE);} 
+        catch (MazeReadingException ex) {JOptionPane.showMessageDialog(this, "An error occured", "Error", JOptionPane.ERROR_MESSAGE);} 
 		catch (IOException ex) {
 			ex.printStackTrace();
 		}
