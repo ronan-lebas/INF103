@@ -112,7 +112,8 @@ public class GUI extends JFrame implements ChangeListener{
 	public void save(){
 		System.out.println("SAVE"); 
 		try {
-			maze.saveToTextFile("tp04/data/saved_lab.maze");
+			maze.setEdited(false);;
+            maze.saveToTextFile("tp04/data/current_lab.maze");
 		} 
 		catch (MazeReadingException ex) {} 
 		catch (IOException ex) {
