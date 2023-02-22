@@ -161,6 +161,13 @@ public class Maze implements Graph{
 	//handle gui (the maze is the model)
 	private String currentDragChange = "N";
 	private boolean edited = false;
+	private boolean showSolution = false;
+	public boolean getShowSolution() {
+		return showSolution;
+	}
+	public void setShowSolution(boolean showSolution) {
+		this.showSolution = showSolution;
+	}
 	public boolean isEdited() {
 		return edited;
 	}

@@ -211,8 +211,6 @@ public class GUI extends JFrame implements ChangeListener{
         maze.setCurrentDragChange("N");
     }
     public void click(int x, int y, boolean isLeftClick){
-        //System.out.println("X : "+ selectedBox.getX() +", Y : "+ selectedBox.getY() + ", click gauche : "+isLeftClick +", selecte ? "+ selectedBox.isSelected());
-
         //this part finds the selected box
         MazeBox selectedBox = null;
         for(int i = 0; i < maze.getWidth(); i++) {

@@ -27,8 +27,16 @@ public class Panel extends JPanel {
         //int n = 500;
         //int m = 500;
         setPreferredSize(new Dimension(n,m));
-        Buttons buttons = new Buttons(this);
-        add(buttons,BorderLayout.SOUTH);
+        //Buttons buttons = new Buttons(this);
+        //add(buttons,BorderLayout.SOUTH);
+        JToggleButton toggle = new JToggleButton("Show solution");
+        add(toggle,BorderLayout.SOUTH);
+        toggle.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent event) {
+            gui.getMaze().setShowSolution(toggle.isSelected());
+            System.out.println(gui.getMaze().getShowSolution());
+            if(gui.getMaze().getShowSolution()) gui.solve();
+            else repaint();
+        }} );
         repaint();
         addMouseListener(new MouseDetector(this));
         addMouseMotionListener(new MouseDetector(this));
@@ -39,8 +47,9 @@ public class Panel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         getGUI().getMaze().paintHexagons(g2);
-
+        if(gui.getMaze().getShowSolution()) gui.solve();
      }
+
      public void notifyForUpdate(){
          repaint();
      }
