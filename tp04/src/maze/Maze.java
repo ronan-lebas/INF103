@@ -166,91 +166,151 @@ public class Maze implements Graph{
 	public boolean getShowSolution() {
 		return showSolution;
 	}
-	public void setShowSolution(boolean showSolution) {
-		this.showSolution = showSolution;
-	}
-	public boolean isEdited() {
-		return edited;
-	}
-	public void setEdited(boolean edited) {
-		this.edited = edited;
-	}
-	public String getCurrentDragChange() {
-		return currentDragChange;
-	}
-	public void setCurrentDragChange(String currentDragChange) {
-		this.currentDragChange = currentDragChange;
-	}
-	public void fillHexagonsList(){
-		hexagonList = new Hexagon[width][height];
-		for(int i = 0; i < this.getWidth(); i++) {
-			for(int j = 0; j < this.getHeight(); j++) {
-				switch((this.getBoxes()[i][j]).getLabel()) {
-					case "W": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
-					case "E": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
-					case "A": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
-					case "D": hexagonList[i][j] = new Hexagon(origin + (d+d/20)*((j%2)+2*i), origin + (d-d/10)*(2*j), d, getBoxes()[i][j].getColor()); break;
-				}
-			}
-		}
-	}
+/**
+ * Sets whether or not to show the solution.
+ *
+ * @param showSolution a boolean value indicating whether or not to show the solution
+ */
+public void setShowSolution(boolean showSolution) {
+    this.showSolution = showSolution;
+}
 
-	public void paintHexagons(Graphics2D g) {
-		for(int i = 0; i < width; i++) {
-            for(int j = 0; j < height; j++) {
-				hexagonList[i][j].paint(g);
+/**
+ * Returns whether or not the game board has been edited.
+ *
+ * @return a boolean value indicating whether or not the game board has been edited
+ */
+public boolean isEdited() {
+    return edited;
+}
+
+/**
+ * Sets whether or not the game board has been edited.
+ *
+ * @param edited a boolean value indicating whether or not the game board has been edited
+ */
+public void setEdited(boolean edited) {
+    this.edited = edited;
+}
+
+/**
+ * Returns the current drag change.
+ *
+ * @return the current drag change
+ */
+public String getCurrentDragChange() {
+    return currentDragChange;
+}
+
+/**
+ * Sets the current drag change.
+ *
+ * @param currentDragChange the current drag change
+ */
+public void setCurrentDragChange(String currentDragChange) {
+    this.currentDragChange = currentDragChange;
+}
+
+/**
+ * Fills the hexagon list with hexagons based on the game board's boxes and their labels.
+ */
+public void fillHexagonsList() {
+    hexagonList = new Hexagon[width][height];
+    for (int i = 0; i < this.getWidth(); i++) {
+        for (int j = 0; j < this.getHeight(); j++) {
+            switch ((this.getBoxes()[i][j]).getLabel()) {
+                case "W":
+                    hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i), origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
+                    break;
+                case "E":
+                    hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i), origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
+                    break;
+                case "A":
+                    hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i), origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
+                    break;
+                case "D":
+                    hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i), origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
+                    break;
             }
         }
-	}
-	private final ArrayList<ChangeListener> listeners = new ArrayList<ChangeListener>() ;
-
-	public void addObserver(ChangeListener listener) {
-   	listeners.add(listener) ;
+    }
 }
-	public void stateChanged() {
-		edited = true;
-		ChangeEvent evt = new ChangeEvent(this) ;
-	
-		for (ChangeListener listener : listeners) {
-	   	listener.stateChanged(evt);
-		}
- 	}
 
-	public Maze(int height, int width) {
-		this.height = height;
-		this.width = width;
-		setGUIValues();
-		boxes = new MazeBox[width][height];
-		for (int i=0; i<width; i++) {
-			for (int j=0; j<height; j++) {
-				boxes[i][j] = new EmptyBox(this,i,j);
-			}
-		}
-		boxes[0][0] = new DepartureBox(this,0,0);
-		boxes[width-1][height-1] = new ArrivalBox(this,width-1,height-1);
-		this.departureBox = (DepartureBox) boxes[0][0];
-		arrivalBox = (ArrivalBox) boxes[width-1][height-1];
-		//this line creates the list of polygons to save to then detect click
-		fillHexagonsList();
-	}
-	public Maze(){}
-	public void setGUIValues(){
-		//int n = 500;
-		//int m = 500;
-		//double r2 = Math.min(n / (2 * width * Math.cos(Math.PI / 6)), m / ((height + 0.5) * Math.sin(Math.PI / 6)));
-		//d = (int) Math.round(r2);
-		/*if(Math.max(width,height) >= 7){
-			d = 300/Math.max(width,height);
-		}
-		else{d = 50;}*/
-		
 
-		d = 200/Math.max(width,height);
-		border = 2*d;
-    	origin = border + d/5;
-	}
+/**
+ * Paints all the hexagons in the maze.
+ *
+ * @param g the Graphics2D object to paint on
+ */
+public void paintHexagons(Graphics2D g) {
+    for(int i = 0; i < width; i++) {
+        for(int j = 0; j < height; j++) {
+            hexagonList[i][j].paint(g);
+        }
+    }
+}
 
-	
+private final ArrayList<ChangeListener> listeners = new ArrayList<ChangeListener>() ;
+
+/**
+ * Adds a change listener to the maze.
+ *
+ * @param listener the ChangeListener to add
+ */
+public void addObserver(ChangeListener listener) {
+    listeners.add(listener) ;
+}
+
+/**
+ * Notifies all the change listeners that the state has changed.
+ */
+public void stateChanged() {
+    edited = true;
+    ChangeEvent evt = new ChangeEvent(this) ;
+
+    for (ChangeListener listener : listeners) {
+        listener.stateChanged(evt);
+    }
+}
+
+/**
+ * Creates a new maze of the specified height and width.
+ *
+ * @param height the height of the maze
+ * @param width the width of the maze
+ */
+public Maze(int height, int width) {
+    this.height = height;
+    this.width = width;
+    setGUIValues();
+    boxes = new MazeBox[width][height];
+    for (int i=0; i<width; i++) {
+        for (int j=0; j<height; j++) {
+            boxes[i][j] = new EmptyBox(this,i,j);
+        }
+    }
+    boxes[0][0] = new DepartureBox(this,0,0);
+    boxes[width-1][height-1] = new ArrivalBox(this,width-1,height-1);
+    this.departureBox = (DepartureBox) boxes[0][0];
+    arrivalBox = (ArrivalBox) boxes[width-1][height-1];
+    //this line creates the list of polygons to save to then detect click
+    fillHexagonsList();
+}
+
+/**
+ * Creates an empty maze with default values for height and width.
+ */
+public Maze(){}
+
+/**
+ * Sets the GUI values for the maze.
+ */
+public void setGUIValues(){
+    d = 200/Math.max(width,height);
+    border = 2*d;
+    origin = border + d/5;
+}
+
 	
 	
 }
