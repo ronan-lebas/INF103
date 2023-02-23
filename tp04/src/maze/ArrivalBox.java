@@ -2,6 +2,9 @@ package maze;
 
 import java.awt.*;
 
+/**
+ * A type of MazeBox that represents the arrival point of the maze.
+ */
 public class ArrivalBox extends MazeBox {
 
 	/**

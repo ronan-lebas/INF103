@@ -3,7 +3,7 @@ package maze;
 import java.awt.*;
 
 /**
- * This class represents an empty box in a maze, where a player can move freely.
+ * A type of MazeBox that represents an empty space of the maze.
  */
 public class EmptyBox extends MazeBox {
 

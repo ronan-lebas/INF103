@@ -2,7 +2,7 @@ package maze;
 
 import java.awt.*;
 /**
- * This class represents a wall box in a maze.
+ * A type of MazeBox that represents a wall of the maze.
  */
 public class WallBox extends MazeBox {
 
