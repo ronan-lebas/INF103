@@ -189,20 +189,26 @@ public class GUI extends JFrame implements ChangeListener{
 		}
 	}
 	public void solve(){
-		ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
+        ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
 		ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
-		for (int i = 1; i < shortestPath.size() - 1; i++) {
-            System.out.println("X : "+((MazeBox) shortestPath.get(i)).getX()+", Y : "+((MazeBox) shortestPath.get(i)).getY());
-            getMaze().getHexagon(((MazeBox) shortestPath.get(i)).getX(), ((MazeBox) shortestPath.get(i)).getY()).paint((Graphics2D) getPanel().getGraphics(),Color.CYAN);
+        if(!(shortestPath.contains((Vertex) maze.getArrivalBox()) && shortestPath.contains((Vertex) maze.getDepartureBox()))){
+            panel.eraseSolution();
+            JOptionPane.showMessageDialog(this, "There is no solution", "Error", JOptionPane.ERROR_MESSAGE);
         }
+		else{for (int i = 1; i < shortestPath.size() - 1; i++) {
+            getMaze().getHexagon(((MazeBox) shortestPath.get(i)).getX(), ((MazeBox) shortestPath.get(i)).getY()).paint((Graphics2D) getPanel().getGraphics(),Color.CYAN);
+        }}
 	}
     public void solve(Graphics g){
 		ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
 		ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
-		for (int i = 1; i < shortestPath.size() - 1; i++) {
-            System.out.println("X : "+((MazeBox) shortestPath.get(i)).getX()+", Y : "+((MazeBox) shortestPath.get(i)).getY());
-            getMaze().getHexagon(((MazeBox) shortestPath.get(i)).getX(), ((MazeBox) shortestPath.get(i)).getY()).paint(g,Color.CYAN);
+		if(!(shortestPath.contains((Vertex) maze.getArrivalBox()) && shortestPath.contains((Vertex) maze.getDepartureBox()))){
+            panel.eraseSolution();
+            JOptionPane.showMessageDialog(this, "There is no solution", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        else{for (int i = 1; i < shortestPath.size() - 1; i++) {
+            getMaze().getHexagon(((MazeBox) shortestPath.get(i)).getX(), ((MazeBox) shortestPath.get(i)).getY()).paint(g,Color.CYAN);
+        }}
 	}
 
     private void changeBox(int i, int j, String newType){

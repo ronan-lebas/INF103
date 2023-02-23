@@ -11,6 +11,7 @@ import maze.Maze;
 
 public class Panel extends JPanel {
     private GUI gui;
+    private JToggleButton toggle;
     
     public GUI getGUI(Panel this){return gui;}
     
@@ -37,6 +38,7 @@ public class Panel extends JPanel {
             if(gui.getMaze().getShowSolution()) gui.solve();
             else repaint();
         }} );
+        this.toggle = toggle;
         addMouseListener(new MouseDetector(this));
         addMouseMotionListener(new MouseDetector(this));
     }
@@ -50,6 +52,11 @@ public class Panel extends JPanel {
      }
 
      public void notifyForUpdate(){
+        repaint();
+     }
+     public void eraseSolution(){
+        gui.getMaze().setShowSolution(false);
+        toggle.setSelected(false);
         repaint();
      }
 
