@@ -95,7 +95,7 @@ public class Maze implements Graph{
 			boolean hasDeparture = false;
 			boolean hasArrival = false;
 			for (int j=0; j<height; j++) {
-				if (lines.get(j).length() != width) throw new MazeReadingException(fileName,j+1,"Le nombre de cases par ligne n'est pas constant.");
+				if (lines.get(j).length() != width) throw new MazeReadingException(fileName,j+1,"The number of boxes per line is not constant.");
 				for (int i=0; i<width; i++) {
 					//fill boxes
 					switch(""+lines.get(j).charAt(i)){
@@ -107,17 +107,18 @@ public class Maze implements Graph{
 							break;
 						case "A": 
 							if (! hasArrival) {boxes[i][j] = new ArrivalBox(this,i,j); hasArrival = ! hasArrival; this.arrivalBox = (ArrivalBox) boxes[i][j];}
-							else {throw new MazeReadingException(fileName, j+1, "Il y a deux cases d'arrivée.");}
+							else {throw new MazeReadingException(fileName, j+1, "There are two arrival boxes.");}
 							break;
 						case "D": 
 							if (! hasDeparture) {boxes[i][j] = new DepartureBox(this,i,j); hasDeparture = ! hasDeparture; this.departureBox = (DepartureBox) boxes[i][j];}
-							else {throw new MazeReadingException(fileName, j+1, "Il y a deux cases de départ.");}
+							else {throw new MazeReadingException(fileName, j+1, "There are two departure boxes.");}
 							break;
 						default : 
-							throw new MazeReadingException(fileName, j+1, "Un caractère n'est pas valide.");
+							throw new MazeReadingException(fileName, j+1, "A character is not valid.");
 					}		
 				}
 			}
+			if (! (hasArrival && hasDeparture)) throw new MazeReadingException(fileName, 0, "Il n'y a pas de case d'arrivée ou de départ.");
 			//this line creates the list of polygons to save to then detect click
 			fillHexagonsList();
 			edited = false;

@@ -170,9 +170,9 @@ public class GUI extends JFrame implements ChangeListener{
             setContentPane(panel);
             pack();
         } 
-		catch(NoSuchFileException e){JOptionPane.showMessageDialog(this, "This file doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);}
+		catch(NoSuchFileException ex){JOptionPane.showMessageDialog(this, "This file doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);}
         catch (MazeSizeException ex) {JOptionPane.showMessageDialog(this, "Please use a maze with more than 1 box", "Error", JOptionPane.ERROR_MESSAGE);} 
-        catch (MazeReadingException ex) {JOptionPane.showMessageDialog(this, "An error occured", "Error", JOptionPane.ERROR_MESSAGE);} 
+        catch (MazeReadingException ex) {JOptionPane.showMessageDialog(this, "An error occured : " + ex.getErrorText(), "Error", JOptionPane.ERROR_MESSAGE);} 
 		catch (IOException ex) {
 			ex.printStackTrace();
 		}

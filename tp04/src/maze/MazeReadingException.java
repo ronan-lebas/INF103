@@ -10,4 +10,7 @@ public class MazeReadingException extends Exception{
 		this.errorText = errorText;
 		System.out.println("File : "+fileName+", line : "+line+", "+errorText);
 	}
+	public String getErrorText(){
+		return errorText;
+	}
 }
