@@ -37,7 +37,6 @@ public class Panel extends JPanel {
             if(gui.getMaze().getShowSolution()) gui.solve();
             else repaint();
         }} );
-        repaint();
         addMouseListener(new MouseDetector(this));
         addMouseMotionListener(new MouseDetector(this));
     }
@@ -47,11 +46,11 @@ public class Panel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         getGUI().getMaze().paintHexagons(g2);
-        if(gui.getMaze().getShowSolution()) gui.solve();
+        if(gui.getMaze().getShowSolution()) gui.solve(g);
      }
 
      public void notifyForUpdate(){
-         repaint();
+        repaint();
      }
 
 }
