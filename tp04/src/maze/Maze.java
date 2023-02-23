@@ -307,7 +307,7 @@ public ArrivalBox getArrivalBox() {
 			}
 		}
 		if (!(hasArrival && hasDeparture))
-			throw new MazeReadingException(fileName, 0, "Il n'y a pas de case d'arrivée ou de départ.");
+			throw new MazeReadingException(fileName, 0, "The maze misses a departure or arrival box.");
 		// this line creates the list of polygons to save to then detect click
 		fillHexagonsList();
 		edited = false;
