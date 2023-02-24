@@ -20,7 +20,7 @@ public class GUI extends JFrame implements ChangeListener {
     /**
      * Returns the maze object
      * 
-     * @return The maze object
+     * @return maze the maze object
      */
     public Maze getMaze() {
         return maze;
@@ -29,7 +29,7 @@ public class GUI extends JFrame implements ChangeListener {
     /**
      * Returns the panel object
      * 
-     * @return The panel object
+     * @return panel the panel object
      */
     public Panel getPanel() {
         return panel;
