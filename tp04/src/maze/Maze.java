@@ -19,80 +19,79 @@ public class Maze implements Graph {
 	private ArrivalBox arrivalBox;
 	private DepartureBox departureBox;
 
-/**
- * Returns the default path used for loading/saving maze files.
- *
- * @return the default path
- */
-public String getDefaultPath() {
-    return defaultPath;
-}
+	/**
+	 * Returns the default path used for loading/saving maze files.
+	 *
+	 * @return defaultPath
+	 */
+	public String getDefaultPath() {
+		return defaultPath;
+	}
 
-/**
- * Returns the default directory used for loading/saving maze files.
- *
- * @return the default directory
- */
-public String getDefaultDirectory() {
-    return defaultDirectory;
-}
+	/**
+	 * Returns the default directory used for loading/saving maze files.
+	 *
+	 * @return defaultDirectory
+	 */
+	public String getDefaultDirectory() {
+		return defaultDirectory;
+	}
 
-/**
- * Returns the height of the maze in number of cells.
- *
- * @return the height of the maze
- */
-public int getHeight() {
-    return height;
-}
+	/**
+	 * Returns the height of the maze in number of boxes.
+	 *
+	 * @return height of the maze
+	 */
+	public int getHeight() {
+		return height;
+	}
 
-/**
- * Returns the width of the maze in number of cells.
- *
- * @return the width of the maze
- */
-public int getWidth() {
-    return width;
-}
+	/**
+	 * Returns the width of the maze in number of boxes.
+	 *
+	 * @return width of the maze
+	 */
+	public int getWidth() {
+		return width;
+	}
 
-/**
- * Returns the 2D array of MazeBox objects representing the maze cells.
- *
- * @return the 2D array of MazeBox objects
- */
-public MazeBox[][] getBoxes() {
-    return boxes;
-}
+	/**
+	 * Returns the 2D array of MazeBox objects representing the maze boxes.
+	 *
+	 * @return boxes the array of boxes
+	 */
+	public MazeBox[][] getBoxes() {
+		return boxes;
+	}
 
-/**
- * Returns the MazeBox object located at the specified position in the maze.
- *
- * @param i the row index of the maze cell
- * @param j the column index of the maze cell
- * @return the MazeBox object at position (i,j)
- */
-public MazeBox getBoxes(int i, int j) {
-    return boxes[i][j];
-}
+	/**
+	 * Returns the MazeBox object located at the specified position in the maze.
+	 *
+	 * @param i the column index of the maze box
+	 * @param j the row index of the maze box
+	 * @return boxes[i][j] at position (i,j)
+	 */
+	public MazeBox getBoxes(int i, int j) {
+		return boxes[i][j];
+	}
 
-/**
- * Returns the DepartureBox object representing the departure cell of the maze.
- *
- * @return the DepartureBox object representing the departure cell
- */
-public DepartureBox getDepartureBox() {
-    return departureBox;
-}
+	/**
+	 * Returns the DepartureBox object representing the departure box of the maze.
+	 *
+	 * @return departureBox object representing the departure box
+	 */
+	public DepartureBox getDepartureBox() {
+		return departureBox;
+	}
 
-/**
- * Returns the ArrivalBox object representing the arrival cell of the maze.
- *
- * @return the ArrivalBox object representing the arrival cell
- */
-public ArrivalBox getArrivalBox() {
-    return arrivalBox;
-}
-
+	/**
+	 * Returns the ArrivalBox object representing the arrival box of the maze.
+	 *
+	 * @return arrivalBox object representing the arrival box
+	 */
+	public ArrivalBox getArrivalBox() {
+		return arrivalBox;
+	}
 
 	// this part is for the GUI part
 	private Hexagon[][] hexagonList;
@@ -103,7 +102,7 @@ public ArrivalBox getArrivalBox() {
 	/**
 	 * Returns the list of all hexagons in the maze.
 	 * 
-	 * @return Hexagon[][] The list of hexagons in the maze.
+	 * @return hexagonList the list of hexagons in the maze.
 	 */
 	public Hexagon[][] getHexagonList() {
 		return hexagonList;
@@ -112,9 +111,9 @@ public ArrivalBox getArrivalBox() {
 	/**
 	 * Returns the hexagon at the specified position in the maze.
 	 * 
-	 * @param i The horizontal position of the hexagon.
-	 * @param j The vertical position of the hexagon.
-	 * @return Hexagon The hexagon at the specified position in the maze.
+	 * @param i the column of the hexagon.
+	 * @param j the row of the hexagon.
+	 * @return hexagonList[i][j] the hexagon at the specified position in the maze.
 	 */
 	public Hexagon getHexagon(int i, int j) {
 		return hexagonList[i][j];
@@ -123,8 +122,7 @@ public ArrivalBox getArrivalBox() {
 	/**
 	 * Returns the distance between the center of a hexagon and one of its sides.
 	 * 
-	 * @return int The distance between the center of a hexagon and one of its
-	 *         sides.
+	 * @return d the distance between the center of a hexagon and one of its sides.
 	 */
 	public int getD() {
 		return d;
@@ -133,7 +131,7 @@ public ArrivalBox getArrivalBox() {
 	/**
 	 * Returns the size of the border around the maze.
 	 * 
-	 * @return int The size of the border around the maze.
+	 * @return border the size of the border around the maze.
 	 */
 	public int getBorder() {
 		return border;
@@ -143,7 +141,8 @@ public ArrivalBox getArrivalBox() {
 	 * Returns the origin of the maze (horizontal distance from the left edge of the
 	 * screen).
 	 * 
-	 * @return int The origin of the maze (horizontal distance from the left edge of
+	 * @return origin the origin of the maze (horizontal distance from the left edge
+	 *         of
 	 *         the screen).
 	 */
 	public int getOrigin() {
@@ -154,8 +153,8 @@ public ArrivalBox getArrivalBox() {
 	 * Returns true if the specified coordinates are inside the boundaries of the
 	 * maze.
 	 * 
-	 * @param i The horizontal coordinate.
-	 * @param j The vertical coordinate.
+	 * @param i the column coordinate.
+	 * @param j the vertical coordinate.
 	 * @return boolean True if the specified coordinates are inside the boundaries
 	 *         of the maze.
 	 */
@@ -169,7 +168,7 @@ public ArrivalBox getArrivalBox() {
 	/**
 	 * Returns a list of all walkable vertexes in the maze.
 	 * 
-	 * @return ArrayList<Vertex> The list of all walkable vertexes in the maze.
+	 * @return allVertexes the list of all walkable vertexes in the maze.
 	 */
 	public ArrayList<Vertex> getAllVertexes() {
 		ArrayList<Vertex> allVertexes = new ArrayList<Vertex>();
@@ -187,7 +186,8 @@ public ArrivalBox getArrivalBox() {
 	 * Returns the successors of the specified vertex in the maze.
 	 *
 	 * @param vertex the vertex whose successors are to be returned
-	 * @return an ArrayList of Vertex objects representing the successors of the
+	 * @return successors2 an ArrayList of Vertex objects representing the
+	 *         successors of the
 	 *         specified vertex
 	 */
 	public ArrayList<Vertex> getSuccessors(Vertex vertex) {
@@ -239,7 +239,6 @@ public ArrivalBox getArrivalBox() {
 	 *         neighbors, -1 otherwise
 	 */
 	public int getDistance(Vertex src, Vertex dst) {
-		// 0 si c'est les memes, 1 si ils sont voisins, -1 sinon
 		if (src == dst) {
 			return 0;
 		}
@@ -370,6 +369,7 @@ public ArrivalBox getArrivalBox() {
 
 	/**
 	 * Returns whether or not to show the solution.
+	 * @return showSolution a boolean value indicating whether or not to show the solution
 	 */
 	public boolean getShowSolution() {
 		return showSolution;
@@ -388,8 +388,7 @@ public ArrivalBox getArrivalBox() {
 	/**
 	 * Returns whether or not the game board has been edited.
 	 *
-	 * @return a boolean value indicating whether or not the game board has been
-	 *         edited
+	 * @return a boolean value indicating whether or not the game board has been edited
 	 */
 	public boolean isEdited() {
 		return edited;
@@ -408,7 +407,7 @@ public ArrivalBox getArrivalBox() {
 	/**
 	 * Returns the current drag change.
 	 *
-	 * @return the current drag change
+	 * @return currentDragChange the current drag change
 	 */
 	public String getCurrentDragChange() {
 		return currentDragChange;
@@ -424,7 +423,7 @@ public ArrivalBox getArrivalBox() {
 	}
 
 	/**
-	 * Fills the hexagon list with hexagons based on the game board's boxes and
+	 * Fills the hexagon list with hexagons based on the maze's boxes and
 	 * their labels.
 	 */
 	public void fillHexagonsList() {
@@ -514,7 +513,7 @@ public ArrivalBox getArrivalBox() {
 	}
 
 	/**
-	 * Creates an empty maze with default values for height and width.
+	 * Creates an empty maze.
 	 */
 	public Maze() {
 	}

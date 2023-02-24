@@ -7,8 +7,7 @@ import java.awt.*;
 public class WallBox extends MazeBox {
 
 	/**
-	 * Constructs a new WallBox object with the given parameters and a specified
-	 * color.
+	 * Constructs a new WallBox object with the given parameters.
 	 * 
 	 * @param maze        the maze that the box belongs to
 	 * @param x           the x coordinate of the box in the maze
@@ -20,8 +19,7 @@ public class WallBox extends MazeBox {
 	}
 
 	/**
-	 * Constructs a new WallBox object with the given parameters and a default label
-	 * and color.
+	 * Constructs a new WallBox object with the given parameters and a default label.
 	 * 
 	 * @param maze the maze that the box belongs to
 	 * @param x    the x coordinate of the box in the maze

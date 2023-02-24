@@ -13,7 +13,7 @@ public class EmptyBox extends MazeBox {
 	 * @param maze        the maze that this box belongs to
 	 * @param x           the x-coordinate of this box
 	 * @param y           the y-coordinate of this box
-	 * @param formerLabel the former label of this box (can be null)
+	 * @param formerLabel the former label of this box
 	 */
 	public EmptyBox(Maze maze, int x, int y, String formerLabel) {
 		super(maze, x, y, "E", formerLabel, Color.WHITE);

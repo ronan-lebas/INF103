@@ -14,7 +14,7 @@ public class MazeReadingException extends Exception {
 	 * 
 	 * @param fileName  the name of the file that caused the exception
 	 * @param line      the line number that caused the exception
-	 * @param errorText the error text that caused the exception
+	 * @param errorText the error text
 	 */
 	public MazeReadingException(String fileName, int line, String errorText) {
 		this.fileName = fileName;
@@ -24,9 +24,9 @@ public class MazeReadingException extends Exception {
 	}
 
 	/**
-	 * Returns the error text that caused the exception.
+	 * Returns the error text.
 	 * 
-	 * @return the error text that caused the exception
+	 * @return the error text
 	 */
 	public String getErrorText() {
 		return errorText;
