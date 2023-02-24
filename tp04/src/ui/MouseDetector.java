@@ -35,7 +35,7 @@ public class MouseDetector extends MouseInputAdapter {
      */
     @Override
     public final void mouseReleased(MouseEvent e) {
-        panel.getGUI().mouseReleased(e.getX(), e.getY());
+        panel.getGUI().mouseReleased();
     }
 
     /**

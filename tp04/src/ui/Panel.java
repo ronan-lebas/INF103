@@ -94,7 +94,7 @@ public class Panel extends JPanel {
     /**
      * Returns the GUI instance associated with this Panel.
      * 
-     * @return the GUI instance associated with this Panel
+     * @return gui the GUI instance associated with this Panel
      */
     public GUI getGUI() {
         return gui;

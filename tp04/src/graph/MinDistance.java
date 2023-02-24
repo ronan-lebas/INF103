@@ -1,6 +1,6 @@
 package graph;
 /**
- * MinDistance is an interface for maintaining minimum distances between vertices in a graph.
+ * MinDistance is an interface for maintaining minimum distances between vertexes in a graph.
  */
 public interface MinDistance {
 	/**

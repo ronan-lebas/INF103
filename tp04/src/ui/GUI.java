@@ -225,7 +225,7 @@ public class GUI extends JFrame implements ChangeListener {
     }
 
     /**
-     * Solves the current maze and displays the shortest path in the GUI.
+     * Solves the current maze and displays the shortest path.
      */
     public void solve() {
         ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
@@ -276,13 +276,9 @@ public class GUI extends JFrame implements ChangeListener {
     }
 
     /**
-     * Deselects all boxes if called by the mouseDetector and computes the new
-     * placement of arrival or departure boxes if necessary.
-     *
-     * @param x the x coordinate of the mouse click
-     * @param y the y coordinate of the mouse click
+     * Deselects all boxes if called by the mouseDetector.
      */
-    public void mouseReleased(int x, int y) {
+    public void mouseReleased() {
         for (int i = 0; i < maze.getWidth(); i++) {
             for (int j = 0; j < maze.getHeight(); j++) {
                 maze.getBoxes(i, j).setSelected(false);
@@ -344,7 +340,7 @@ public class GUI extends JFrame implements ChangeListener {
     }
 
     /**
-     * This method is called whenever the state of the slider changes. It notifies
+     * This method is called whenever the state changes. It notifies
      * the panel to update its view.
      * 
      * @param evt the ChangeEvent that occurred
@@ -356,7 +352,7 @@ public class GUI extends JFrame implements ChangeListener {
     /**
      * The main method of the program. It creates a new GUI and runs the program.
      * 
-     * @param args an array of command-line arguments for the program
+     * @param args an array of command-line arguments for the program, useless here
      */
     public static void main(String[] args) {
         GUI gui = new GUI();

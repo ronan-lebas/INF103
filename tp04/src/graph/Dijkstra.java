@@ -2,20 +2,22 @@ package graph;
 
 import java.util.ArrayList;
 import maze.*;
+
 /**
- * Implementation of the Dijkstra algorithm to find the shortest paths from a start vertex to all other vertices in a graph.
+ * Implementation of the Dijkstra algorithm to find the shortest paths from a
+ * start vertex to an end vertex.
  */
 public class Dijkstra {
 
 	/**
-	 * Computes the shortest paths from a start vertex to all other vertices in a
+	 * Computes the shortest path from a start vertex to an end vertex in a
 	 * graph using the Dijkstra algorithm.
 	 *
-	 * @param graph       the graph on which to compute the shortest paths
-	 * @param startVertex the start vertex from which to compute the shortest paths
-	 * @param endVertex   the end vertex to which to compute the shortest paths
-	 * @return an object containing the shortest paths from the start vertex to all
-	 *         other vertices in the graph
+	 * @param graph       the graph on which to compute the shortest path
+	 * @param startVertex the start vertex from which to compute the shortest path
+	 * @param endVertex   the end vertex to which to compute the shortest path
+	 * @return an object containing the shortest path from the start vertex to the
+	 *         end vertex in the graph
 	 */
 	public static ShortestPaths dijkstra(Graph graph, Vertex startVertex, Vertex endVertex) {
 		ProcessedVertexesImpl processedVertexes = new ProcessedVertexesImpl();
