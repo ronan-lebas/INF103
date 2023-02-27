@@ -431,32 +431,15 @@ public class Maze implements Graph {
 	}
 
 	/**
-	 * Fills the hexagon list with hexagons based on the maze's boxes and
-	 * their labels.
+	 * Fills the hexagon list with hexagons based on the maze's boxes.
 	 */
 	public void fillHexagonsList() {
 		hexagonList = new Hexagon[width][height];
 		for (int i = 0; i < this.getWidth(); i++) {
 			for (int j = 0; j < this.getHeight(); j++) {
-				switch ((this.getBoxes()[i][j]).getLabel()) {
-					//creates hexagons by computing the coordinates of the center of the hexagon and copying the color of the box
-					case "W":
-						hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i),
-								origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
-						break;
-					case "E":
-						hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i),
-								origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
-						break;
-					case "A":
-						hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i),
-								origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
-						break;
-					case "D":
-						hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i),
-								origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
-						break;
-				}
+				//creates hexagons by computing the coordinates of the center of the hexagon and copying the color of the box
+				hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i),
+				origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
 			}
 		}
 	}
