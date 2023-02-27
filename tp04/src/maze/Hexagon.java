@@ -3,7 +3,7 @@ package maze;
 import java.lang.Math;
 import java.awt.*;
 /**
- * The Hexagon class represents a hexagon polygon with a center point (x, y), a distance from the center to each corner (d), 
+ * The Hexagon class represents a hexagon polygon with a center point (x, y), a distance from the center to closest sides (d), 
  * and a color. It extends the Polygon class and contains methods for painting the hexagon.
  */
 public class Hexagon extends Polygon {
@@ -11,6 +11,7 @@ public class Hexagon extends Polygon {
     private int y;
     private float d;
     public final int npoints;
+    //the attribute color is used by the hexagon to paint itself, and is copied from the corresponding box in the maze
     private Color color;
 
     /**
@@ -23,7 +24,7 @@ public class Hexagon extends Polygon {
     }
 
     /**
-     * Paints the hexagon with its current color.
+     * Paints the hexagon with its color.
      * 
      * @param g the graphics object to paint with
      */
@@ -45,11 +46,11 @@ public class Hexagon extends Polygon {
 
     /**
      * Constructs a new Hexagon with the specified center point, distance from
-     * center to corner, and color.
+     * center to closest sides, and color.
      * 
      * @param x     the x-coordinate of the center point
      * @param y     the y-coordinate of the center point
-     * @param d     the distance from the center point to each corner of the hexagon
+     * @param d     the distance from the center point to the closest sides of the hexagon
      * @param color the color of the hexagon
      */
     public Hexagon(int x, int y, int d, Color color) {
@@ -59,6 +60,7 @@ public class Hexagon extends Polygon {
         this.d = d;
         this.color = color;
 
+        //the hexagon is constructed by computing and adding the six points of the hexagon to the polygon
         double a = x;
         double b = y;
         a = x + d;

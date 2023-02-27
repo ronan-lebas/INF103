@@ -10,9 +10,13 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.event.*;
 
+/**
+ * A class representing a maze, and implementing the Graph interface.
+ */
 public class Maze implements Graph {
-	private int height;// = boxes[0].length;
-	private int width;// = boxes.length;
+	private int height;
+	private int width;
+	// The default path and directory are used for loading/saving maze files.
 	private final String defaultPath = "tp04/data/default.maze";
 	private final String defaultDirectory = "./tp04/data/";
 	private MazeBox[][] boxes;
@@ -69,7 +73,7 @@ public class Maze implements Graph {
 	 *
 	 * @param i the column index of the maze box
 	 * @param j the row index of the maze box
-	 * @return boxes[i][j] at position (i,j)
+	 * @return boxes[i][j] the box at position (i,j)
 	 */
 	public MazeBox getBoxes(int i, int j) {
 		return boxes[i][j];
@@ -139,24 +143,20 @@ public class Maze implements Graph {
 
 	/**
 	 * Returns the origin of the maze (horizontal distance from the left edge of the
-	 * screen).
+	 * screen to the first box).
 	 * 
-	 * @return origin the origin of the maze (horizontal distance from the left edge
-	 *         of
-	 *         the screen).
+	 * @return origin the origin of the maze
 	 */
 	public int getOrigin() {
 		return origin;
 	}
 
 	/**
-	 * Returns true if the specified coordinates are inside the boundaries of the
-	 * maze.
+	 * Returns true if the given coordinates correspond to a box inside the maze, false otherwise.
 	 * 
-	 * @param i the column coordinate.
-	 * @param j the vertical coordinate.
-	 * @return boolean True if the specified coordinates are inside the boundaries
-	 *         of the maze.
+	 * @param i the column index.
+	 * @param j the row index.
+	 * @return boolean True if the given coordinates are inside the maze, false otherwise.
 	 */
 	private boolean isInMaze(int i, int j) {
 		if (i > -1 && i < width && j > -1 && j < height) {
@@ -185,7 +185,7 @@ public class Maze implements Graph {
 	/**
 	 * Returns the successors of the specified vertex in the maze.
 	 *
-	 * @param vertex the vertex whose successors are to be returned
+	 * @param vertex the vertex that we want the successors of
 	 * @return successors2 an ArrayList of Vertex objects representing the
 	 *         successors of the
 	 *         specified vertex
@@ -196,12 +196,14 @@ public class Maze implements Graph {
 		int y = box.getY();
 		ArrayList<Vertex> successors = new ArrayList<Vertex>();
 		int e = 0;
+		//e is used to determine the successors according to the parity of the row
 		if (y % 2 == 0) {
 			e = -1;
 		}
 		if (y % 2 == 1) {
 			e = 1;
 		}
+		//the isInMaze method is used to avoid IndexOutOfBoundsException
 		if (isInMaze(x - 1, y)) {
 			successors.add(boxes[x - 1][y]);
 		}
@@ -222,6 +224,7 @@ public class Maze implements Graph {
 		}
 		ArrayList<Vertex> successors2 = new ArrayList<Vertex>();
 		for (Vertex vertex2 : successors) {
+			//only the walkable boxes are added to the successors list
 			if (((MazeBox) vertex2).isWalkable()) {
 				successors2.add(vertex2);
 			}
@@ -230,12 +233,12 @@ public class Maze implements Graph {
 	}
 
 	/**
-	 * Returns the distance between two vertices in the maze.
+	 * Returns the distance between two vertexes in the maze.
 	 *
 	 * @param src the source vertex
 	 * @param dst the destination vertex
 	 * @return an integer representing the distance between the source and
-	 *         destination vertices: 0 if they are the same, 1 if they are
+	 *         destination vertexes: 0 if they are the same, 1 if they are
 	 *         neighbors, -1 otherwise
 	 */
 	public int getDistance(Vertex src, Vertex dst) {
@@ -266,8 +269,10 @@ public class Maze implements Graph {
 		width = lines.get(0).length();
 		if (height * width < 2)
 			throw new MazeSizeException();
+		//calls the method setGUIValues() to set the values of the attributes according to the size of the maze
 		setGUIValues();
 		boxes = new MazeBox[width][height];
+		//the two followings booleans are used to check if the maze has exactly one arrival and one departure
 		boolean hasDeparture = false;
 		boolean hasArrival = false;
 		for (int j = 0; j < height; j++) {
@@ -307,7 +312,7 @@ public class Maze implements Graph {
 		}
 		if (!(hasArrival && hasDeparture))
 			throw new MazeReadingException(fileName, 0, "The maze misses a departure or arrival box.");
-		// this line creates the list of polygons to save to then detect click
+		//creates the list of polygons to save and then detect clicks
 		fillHexagonsList();
 		edited = false;
 
@@ -325,7 +330,7 @@ public class Maze implements Graph {
 		for (int j = 0; j < height; j++) {
 			String line = new String();
 			for (int i = 0; i < width; i++) {
-				line = line + this.boxes[i][j].getLabel();
+				line = line + boxes[i][j].getLabel();
 			}
 			lines.add(line);
 		}
@@ -345,11 +350,13 @@ public class Maze implements Graph {
 				boxes[i][j] = new EmptyBox(this, i, j, boxes[i][j].getLabel());
 				break;
 			case "A":
+				//update the former arrival box with its previous state	
 				updateBox(arrivalBox.getX(), arrivalBox.getY(), arrivalBox.getFormerLabel());
 				boxes[i][j] = new ArrivalBox(this, i, j, boxes[i][j].getLabel());
 				arrivalBox = (ArrivalBox) boxes[i][j];
 				break;
 			case "D":
+				//update the former departure box with its previous state
 				updateBox(departureBox.getX(), departureBox.getY(), departureBox.getFormerLabel());
 				boxes[i][j] = new DepartureBox(this, i, j, boxes[i][j].getLabel());
 				departureBox = (DepartureBox) boxes[i][j];
@@ -358,6 +365,7 @@ public class Maze implements Graph {
 				boxes[i][j] = new WallBox(this, i, j, boxes[i][j].getLabel());
 				break;
 		}
+		//update the list of polygons to save and then detect clicks
 		fillHexagonsList();
 		stateChanged();
 	}
@@ -386,18 +394,18 @@ public class Maze implements Graph {
 	}
 
 	/**
-	 * Returns whether or not the game board has been edited.
+	 * Returns whether or not the maze has been edited.
 	 *
-	 * @return a boolean value indicating whether or not the game board has been edited
+	 * @return a boolean value indicating whether or not the maze has been edited
 	 */
 	public boolean isEdited() {
 		return edited;
 	}
 
 	/**
-	 * Sets whether or not the game board has been edited.
+	 * Sets whether or not the maze has been edited.
 	 *
-	 * @param edited a boolean value indicating whether or not the game board has
+	 * @param edited a boolean value indicating whether or not the maze has
 	 *               been edited
 	 */
 	public void setEdited(boolean edited) {
@@ -431,6 +439,7 @@ public class Maze implements Graph {
 		for (int i = 0; i < this.getWidth(); i++) {
 			for (int j = 0; j < this.getHeight(); j++) {
 				switch ((this.getBoxes()[i][j]).getLabel()) {
+					//creates hexagons by computing the coordinates of the center of the hexagon and copying the color of the box
 					case "W":
 						hexagonList[i][j] = new Hexagon(origin + (d + d / 20) * ((j % 2) + 2 * i),
 								origin + (d - d / 10) * (2 * j), d, getBoxes()[i][j].getColor());
@@ -460,6 +469,7 @@ public class Maze implements Graph {
 	public void paintHexagons(Graphics2D g) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
+				//asks each hexagon to paint itself
 				hexagonList[i][j].paint(g);
 			}
 		}
@@ -497,18 +507,21 @@ public class Maze implements Graph {
 	public Maze(int height, int width) {
 		this.height = height;
 		this.width = width;
+		//computes the gui values based on the height and width
 		setGUIValues();
 		boxes = new MazeBox[width][height];
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
+				//creates an empty maze
 				boxes[i][j] = new EmptyBox(this, i, j);
 			}
 		}
+		//the maze needs to have exactly one departure box and one arrival box
 		boxes[0][0] = new DepartureBox(this, 0, 0);
 		boxes[width - 1][height - 1] = new ArrivalBox(this, width - 1, height - 1);
 		this.departureBox = (DepartureBox) boxes[0][0];
 		arrivalBox = (ArrivalBox) boxes[width - 1][height - 1];
-		// this line creates the list of polygons to save to then detect click
+		//creates the list of polygons to save and then detect clicks
 		fillHexagonsList();
 	}
 
@@ -522,6 +535,7 @@ public class Maze implements Graph {
 	 * Sets the GUI values for the maze.
 	 */
 	public void setGUIValues() {
+		//arbitrary values to make the maze looking good
 		d = 200 / Math.max(width, height);
 		border = 2 * d;
 		origin = border + d / 5;

@@ -2,7 +2,7 @@ package graph;
 
 import java.util.ArrayList;
 /**
- * ShortestPaths is an interface for computing and retrieving the shortest path between two vertices in a graph.
+ * ShortestPaths is an interface for computing and retrieving the shortest path between two vertexes in a graph.
  */
 public interface ShortestPaths {
 	/**
@@ -14,7 +14,7 @@ public interface ShortestPaths {
 	public Vertex previous(Vertex vertex);
 
 	/**
-	 * Creates a link between two vertices in the graph.
+	 * Creates a link between two vertexes in the graph.
 	 * 
 	 * @param vertex1 the first vertex to link
 	 * @param vertex2 the second vertex to link
@@ -22,10 +22,10 @@ public interface ShortestPaths {
 	public void link(Vertex vertex1, Vertex vertex2);
 
 	/**
-	 * Returns the shortest path between two vertices in the graph.
+	 * Returns the shortest path between two vertexes in the graph.
 	 * 
 	 * @param endVertex the end vertex of the shortest path
-	 * @return an ArrayList of vertices representing the shortest path between the
+	 * @return an ArrayList of vertexes representing the shortest path between the
 	 *         start vertex and the end vertex
 	 */
 	public ArrayList<Vertex> getShortestPath(Vertex endVertex);

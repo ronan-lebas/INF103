@@ -29,6 +29,7 @@ public class DepartureBox extends MazeBox {
 	 */
 	public DepartureBox(Maze maze, int x, int y) {
 		super(maze, x, y, "D", "E", Color.RED);
+		//the former label is "E" by default, so we can replace the departure box by an other box when we move it
 	}
 
 	/**

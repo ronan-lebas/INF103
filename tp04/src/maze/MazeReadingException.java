@@ -20,6 +20,7 @@ public class MazeReadingException extends Exception {
 		this.fileName = fileName;
 		this.line = line;
 		this.errorText = errorText;
+		//prints the error message in the console containing the file name, the line number and the error text
 		System.out.println("File : " + fileName + ", line : " + line + ", " + errorText);
 	}
 

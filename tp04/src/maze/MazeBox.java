@@ -40,7 +40,7 @@ public abstract class MazeBox implements Vertex {
 	/**
 	 * Check if the box is selected.
 	 * 
-	 * @return true if the box is selected, false otherwise.
+	 * @return true if the box is selected, false otherwise, this attribute is used in the drag computations.
 	 */
 	public boolean isSelected() {
 		return selected;
@@ -56,7 +56,7 @@ public abstract class MazeBox implements Vertex {
 	}
 
 	/**
-	 * Get the x-coordinate of the box.
+	 * Get the x-coordinate of the box in the maze.
 	 * 
 	 * @return The x-coordinate of the box.
 	 */
@@ -65,7 +65,7 @@ public abstract class MazeBox implements Vertex {
 	}
 
 	/**
-	 * Get the y-coordinate of the box.
+	 * Get the y-coordinate of the box in the maze.
 	 * 
 	 * @return The y-coordinate of the box.
 	 */
@@ -74,7 +74,7 @@ public abstract class MazeBox implements Vertex {
 	}
 
 	/**
-	 * Get the color of the box.
+	 * Get the color of the box. We use this attribute so that the color is only known by the box and not by the maze.
 	 * 
 	 * @return The color of the box.
 	 */

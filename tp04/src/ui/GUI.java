@@ -13,6 +13,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import graph.*;
 import maze.*;
 
+/**
+ * A JFrame class for building the GUI and managing the maze and its solution.
+ * Contains a menu bar with buttons for loading, saving, and creating a new
+ * maze.
+ */
 public class GUI extends JFrame implements ChangeListener {
     private Maze maze;
     private Panel panel;
@@ -36,7 +41,8 @@ public class GUI extends JFrame implements ChangeListener {
     }
 
     /**
-     * Builds the GUI, adds the menu bar, and set the functions of the menu bar buttons.
+     * Builds the GUI, adds the menu bar, and set the functions of the menu bar
+     * buttons.
      */
     public GUI() {
         super("Maze Application");
@@ -45,6 +51,7 @@ public class GUI extends JFrame implements ChangeListener {
         Panel panel = new Panel(this);
         this.panel = panel;
         setContentPane(panel);
+        // sets the window at the center of the screen
         setLocationRelativeTo(null);
 
         JMenuBar menuBar = new JMenuBar();
@@ -61,7 +68,7 @@ public class GUI extends JFrame implements ChangeListener {
                 newMaze();
             }
         });
-
+        // sets up the file explorer
         JFileChooser explorer = new JFileChooser();
 
         load.addActionListener(new ActionListener() {
@@ -69,12 +76,14 @@ public class GUI extends JFrame implements ChangeListener {
                 String path;
                 explorer.setCurrentDirectory(new File(maze.getDefaultDirectory()));
                 explorer.setDialogTitle("Choose a maze :");
+                // filters the files to only show .maze files
                 explorer.setAcceptAllFileFilterUsed(false);
                 explorer.addChoosableFileFilter(new FileNameExtensionFilter("Maze", "maze"));
                 explorer.showOpenDialog(null);
                 // try catch needed to avoid exception when the explorer is close without
                 // choosing a file
                 try {
+                    // if a file is chosen, loads it
                     path = explorer.getSelectedFile().getAbsolutePath();
                     load(path);
                 } catch (Exception e) {
@@ -82,6 +91,7 @@ public class GUI extends JFrame implements ChangeListener {
             }
         });
         save.addActionListener(new ActionListener() {
+            // similar to load
             public void actionPerformed(ActionEvent event) {
                 String path;
                 explorer.setCurrentDirectory(new File(maze.getDefaultDirectory()));
@@ -96,16 +106,24 @@ public class GUI extends JFrame implements ChangeListener {
                 }
             }
         });
-
+        // implements the observer observable pattern
         maze.addObserver(this);
 
         addWindowListener(new WindowAdapter() {
+            /**
+             * This method is called when the user clicks on the close button of the window.
+             * If the current maze has been edited, the user is prompted to save before
+             * exiting.
+             * 
+             * @param e the window event
+             */
             @Override
             public void windowClosing(WindowEvent e) {
                 if (maze.isEdited() == true) {
                     int choice = JOptionPane.showConfirmDialog(null, "Do you want to save before exiting ?");
                     if (choice == JOptionPane.YES_OPTION) {
                         String name = JOptionPane.showInputDialog(null, "Enter the name of the maze", "default");
+                        // save the maze with the new name to the "data" directory
                         save(maze.getDefaultDirectory() + name + ".maze");
                         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     }
@@ -134,6 +152,7 @@ public class GUI extends JFrame implements ChangeListener {
      * creating a new maze.
      */
     public void newMaze() {
+        // similar to the windowClosing method
         if (maze.isEdited() == true) {
             int choice = JOptionPane.showConfirmDialog(null, "Do you want to save before creating a new maze ?");
             if (choice == JOptionPane.YES_OPTION) {
@@ -147,13 +166,16 @@ public class GUI extends JFrame implements ChangeListener {
             }
         }
 
+        // creates a new maze with the user-defined height and width
         try {
             String newHeight = JOptionPane.showInputDialog(this, "New height ?", 2);
             String newWidth = JOptionPane.showInputDialog(this, "New width ?", 2);
             int height = Integer.parseInt(newHeight);
             int width = Integer.parseInt(newWidth);
-            if (height * width < 2)
+            if (height * width < 2) {
+                // the maze has one box, so it is not valid
                 throw new MazeSizeException();
+            }
             maze = new Maze(height, width);
             maze.addObserver(this);
             panel = new Panel(this);
@@ -176,6 +198,7 @@ public class GUI extends JFrame implements ChangeListener {
      * @param path the path of the file to load the maze from.
      */
     public void load(final String path) {
+        // similar to the windowClosing method
         if (maze.isEdited() == true) {
             int choice = JOptionPane.showConfirmDialog(null, "Do you want to save before loading a new maze ?");
             if (choice == JOptionPane.YES_OPTION) {
@@ -189,7 +212,6 @@ public class GUI extends JFrame implements ChangeListener {
             }
         }
 
-        System.out.println("LOAD");
         try {
             maze.initFromTextFile(path);
             panel = new Panel(this);
@@ -214,7 +236,6 @@ public class GUI extends JFrame implements ChangeListener {
      * @param path the path where the maze will be saved
      */
     public void save(final String path) {
-        System.out.println("SAVE");
         try {
             maze.setEdited(false);
             maze.saveToTextFile(path);
@@ -232,10 +253,12 @@ public class GUI extends JFrame implements ChangeListener {
         ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
         if (!(shortestPath.contains((Vertex) maze.getArrivalBox())
                 && shortestPath.contains((Vertex) maze.getDepartureBox()))) {
+            // error message if there is no solution
             panel.eraseSolution();
             JOptionPane.showMessageDialog(this, "There is no solution", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             for (int i = 1; i < shortestPath.size() - 1; i++) {
+                // asks the maze to paint the shortest path
                 getMaze().getHexagon(((MazeBox) shortestPath.get(i)).getX(), ((MazeBox) shortestPath.get(i)).getY())
                         .paint((Graphics2D) getPanel().getGraphics(), Color.CYAN);
             }
@@ -249,6 +272,8 @@ public class GUI extends JFrame implements ChangeListener {
      * @param g the graphics object to be used for drawing the solution
      */
     public void solve(Graphics g) {
+        // same as before, but with a specified graphics object, so this method can be
+        // used by the panel
         ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
         ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
         if (!(shortestPath.contains((Vertex) maze.getArrivalBox())
@@ -284,6 +309,7 @@ public class GUI extends JFrame implements ChangeListener {
                 maze.getBoxes(i, j).setSelected(false);
             }
         }
+        //sets the current drag change to "N" for null
         maze.setCurrentDragChange("N");
     }
 
@@ -302,6 +328,7 @@ public class GUI extends JFrame implements ChangeListener {
         MazeBox selectedBox = null;
         for (int i = 0; i < maze.getWidth(); i++) {
             for (int j = 0; j < maze.getHeight(); j++) {
+                //manages the isSelected boolean of the boxes, indicating if the box is selected for the first time or not
                 if (maze.getHexagon(i, j).contains(x, y)) {
                     selectedBox = maze.getBoxes(i, j);
                 } else {
@@ -310,30 +337,36 @@ public class GUI extends JFrame implements ChangeListener {
             }
         }
         // this part changes the type of the selected box
-        if (selectedBox != null && selectedBox.isSelected() == false) {
+        if (selectedBox != null && selectedBox.isSelected() == false) { // if the box is selected for the first time
             int i = selectedBox.getX();
             int j = selectedBox.getY();
-            if (isLeftClick) {
+            if (isLeftClick) { // if the click is a left-click
                 if (maze.getCurrentDragChange() != "N"
                         && (selectedBox.getLabel() == "E" || selectedBox.getLabel() == "W")) {
+                    //the drag changes boxes to empty or wall
                     changeBox(i, j, maze.getCurrentDragChange());
                 }
 
                 if (selectedBox.getLabel() == "E" && maze.getCurrentDragChange() == "N") {
+                    //starts a drag change
                     changeBox(i, j, "W");
                     maze.setCurrentDragChange("W");
                 }
                 if (selectedBox.getLabel() == "W" && maze.getCurrentDragChange() == "N") {
+                    //starts a drag change
                     changeBox(i, j, "E");
                     maze.setCurrentDragChange("E");
                 }
                 if (selectedBox.getLabel() == "D" && maze.getCurrentDragChange() == "N") {
+                    //starts a drag change, but doesn't change the type of the box because this is already a departure box, we only want to move it
                     maze.setCurrentDragChange("D");
                 }
                 if (selectedBox.getLabel() == "A" && maze.getCurrentDragChange() == "N") {
+                    //starts a drag change, but doesn't change the type of the box because this is already an arrival box, we only want to move it
                     maze.setCurrentDragChange("A");
                 }
             }
+            //sets the isSelected boolean of the box to true for the next computation, so that the box is not selected for the first time anymore
             maze.getBoxes(i, j).setSelected(true);
         }
 

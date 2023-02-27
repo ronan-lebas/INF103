@@ -28,6 +28,7 @@ public class ArrivalBox extends MazeBox {
 	 */
 	public ArrivalBox(Maze maze, int x, int y) {
 		super(maze, x, y, "A", "E", Color.GREEN);
+		//the former label is "E" by default, so we can replace the arrival box by an other box when we move it
 	}
 
 	/**

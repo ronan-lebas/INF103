@@ -34,8 +34,6 @@ public class Panel extends JPanel {
         // int n = 500;
         // int m = 500;
         setPreferredSize(new Dimension(n, m));
-        // Buttons buttons = new Buttons(this);
-        // add(buttons,BorderLayout.SOUTH);
         JToggleButton toggle = new JToggleButton("Show solution");
         add(toggle, BorderLayout.SOUTH);
         toggle.addActionListener(new ActionListener() {
@@ -47,8 +45,8 @@ public class Panel extends JPanel {
              * @param event the event that triggered this action
              */
             public void actionPerformed(ActionEvent event) {
+                //copies the state of the toggle button to a maze attribute
                 gui.getMaze().setShowSolution(toggle.isSelected());
-                System.out.println(gui.getMaze().getShowSolution());
                 if (gui.getMaze().getShowSolution())
                     gui.solve();
                 else
@@ -56,6 +54,7 @@ public class Panel extends JPanel {
             }
         });
         this.toggle = toggle;
+        //adds a MouseDetector to the panel to listen for clicks and drags
         addMouseListener(new MouseDetector(this));
         addMouseMotionListener(new MouseDetector(this));
     }
@@ -68,9 +67,12 @@ public class Panel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        //turns on anti-aliasing
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //asks the maze to draw itself
         getGUI().getMaze().paintHexagons(g2);
+        //shows the solution if the toggle button is selected
         if (gui.getMaze().getShowSolution())
             gui.solve(g);
     }

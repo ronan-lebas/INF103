@@ -9,5 +9,6 @@ public class MazeSizeException extends Exception {
      */
     public MazeSizeException() {
         super("The maze cannot have only one box !");
+        //this exception is thrown when the maze has only one box
     }
 }

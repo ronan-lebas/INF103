@@ -22,6 +22,7 @@ public class ShortestPathsImpl extends HashMap implements ShortestPaths {
     public ArrayList<Vertex> getShortestPath(Vertex endVertex) {
         ArrayList<Vertex> shortestPath = new ArrayList<Vertex>();
         shortestPath.add(endVertex);
+        //add the previous vertex to the shortest path until the start vertex is reached
         while (containsKey(shortestPath.get(shortestPath.size() - 1))) {
             shortestPath.add(previous(shortestPath.get(shortestPath.size() - 1)));
         }

@@ -27,6 +27,7 @@ public class WallBox extends MazeBox {
 	 */
 	public WallBox(Maze maze, int x, int y) {
 		super(maze, x, y, "W", "W", Color.BLACK);
+		//default label is "W"
 	}
 
 	/**

@@ -25,6 +25,7 @@ public class MouseDetector extends MouseInputAdapter {
      */
     @Override
     public final void mousePressed(MouseEvent e) {
+        //notifies the panel with the coordinates of the mouse click and whether the left or right mouse button was clicked
         panel.getGUI().click(e.getX(), e.getY(), SwingUtilities.isLeftMouseButton(e));
     }
 
@@ -45,6 +46,7 @@ public class MouseDetector extends MouseInputAdapter {
      */
     @Override
     public final void mouseDragged(MouseEvent e) {
+        //notifies the panel with the coordinates of the mouse click and whether the left or right mouse button was clicked
         panel.getGUI().click(e.getX(), e.getY(), SwingUtilities.isLeftMouseButton(e));
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import maze.*;
 
 /**
- * Implementation of the Dijkstra algorithm to find the shortest paths from a
+ * Implementation of the Dijkstra algorithm to find the shortest path from a
  * start vertex to an end vertex.
  */
 public class Dijkstra {
@@ -24,12 +24,14 @@ public class Dijkstra {
 		ShortestPathsImpl shortestPaths = new ShortestPathsImpl();
 		MinDistanceImpl minDistance = new MinDistanceImpl();
 		ArrayList<Vertex> vertexes = graph.getAllVertexes();
+		//algorithm initialization
 		for (Vertex vertex : vertexes) {
 			minDistance.setMinDistance(vertex, -1);
 		}
+		//the pivot vertex is the start vertex
 		Vertex pivotVertex = startVertex;
 		minDistance.setMinDistance(startVertex, 0);
-
+		//path computation
 		while (vertexes.size() > 1) {
 			processedVertexes.add(pivotVertex);
 			ArrayList<Vertex> successors = graph.getSuccessors(pivotVertex);
@@ -48,6 +50,7 @@ public class Dijkstra {
 				}
 			}
 			vertexes.remove(pivotVertex);
+			//find the next pivot vertex
 			int minIndex = 0;
 			for (int i = 0; i < vertexes.size(); i++) {
 				if (minDistance.minDistance(vertexes.get(i)) != -1
