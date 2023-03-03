@@ -48,7 +48,7 @@ public class Panel extends JPanel {
                 //copies the state of the toggle button to a maze attribute
                 gui.getMaze().setShowSolution(toggle.isSelected());
                 if (gui.getMaze().getShowSolution())
-                    gui.solve();
+                    gui.solve(getGraphics());
                 else
                     repaint();
             }
