@@ -211,22 +211,29 @@ public class GUI extends JFrame implements ChangeListener {
             }
         }
 
+        Maze maze2 = new Maze();
         try {
-            maze.initFromTextFile(path);
-            panel = new Panel(this);
-            setContentPane(panel);
-            pack();
+            maze2.initFromTextFile(path);
         } catch (NoSuchFileException ex) {
             JOptionPane.showMessageDialog(this, "This file doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         } catch (MazeSizeException ex) {
             JOptionPane.showMessageDialog(this, "Please use a maze with more than 1 box", "Error",
                     JOptionPane.ERROR_MESSAGE);
+                    return;
         } catch (MazeReadingException ex) {
             JOptionPane.showMessageDialog(this, "An error occured : " + ex.getErrorText(), "Error",
                     JOptionPane.ERROR_MESSAGE);
+                    return;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return;
         }
+        this.maze = maze2;
+        maze.addObserver(this);
+        panel = new Panel(this);
+        setContentPane(panel);
+        pack();
     }
 
     /**
