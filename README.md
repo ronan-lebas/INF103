@@ -1,5 +1,7 @@
 # Projet Java, Ronan LEBAS
 ## Comment l'utiliser ?
+### Lancer le programme
+Il faut exécuter la classe `GUI.java` qui se trouve dans `projet/src/ui`.
 ### Édition des cases du labyrinthe
 Mon but était de faire les contrôles de la façon la plus *user friendly* possible.  
 * Cliquer sur une case vide ou mur pour interchanger vide <-> mur
