@@ -482,6 +482,78 @@ public class Maze implements Graph {
 	}
 
 	/**
+     * Deselects all boxes.
+     */
+    public void mouseReleased() {
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                getBoxes(i, j).setSelected(false);
+            }
+        }
+        //sets the current drag change to "N" for null
+        setCurrentDragChange("N");
+    }
+
+	/**
+     * Handles a mouse click event at the given coordinates (x, y).
+     * Changes the type of the selected box and computes new placement of arrival or
+     * departure boxes if necessary.
+     *
+     * @param x           the x coordinate of the mouse click
+     * @param y           the y coordinate of the mouse click
+     * @param isLeftClick true if the click is a left-click, false if it is a
+     *                    right-click
+     */
+    public void click(int x, int y, boolean isLeftClick) {
+        // this part finds the selected box
+        MazeBox selectedBox = null;
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                //manages the isSelected boolean of the boxes, indicating if the box is selected for the first time or not
+                if (getHexagon(i, j).contains(x, y)) {
+                    selectedBox = getBoxes(i, j);
+                } else {
+                    getBoxes(i, j).setSelected(false);
+                }
+            }
+        }
+        // this part changes the type of the selected box
+        if (selectedBox != null && selectedBox.isSelected() == false) { // if the box is selected for the first time
+            int i = selectedBox.getX();
+            int j = selectedBox.getY();
+            if (isLeftClick) { // if the click is a left-click
+                if (getCurrentDragChange() != "N"
+                        && (selectedBox.getLabel() == "E" || selectedBox.getLabel() == "W")) {
+                    //the drag changes boxes to empty or wall
+                    updateBox(i, j, getCurrentDragChange());
+                }
+
+                if (selectedBox.getLabel() == "E" && getCurrentDragChange() == "N") {
+                    //starts a drag change
+                    updateBox(i, j, "W");
+                    setCurrentDragChange("W");
+                }
+                if (selectedBox.getLabel() == "W" && getCurrentDragChange() == "N") {
+                    //starts a drag change
+                    updateBox(i, j, "E");
+                    setCurrentDragChange("E");
+                }
+                if (selectedBox.getLabel() == "D" && getCurrentDragChange() == "N") {
+                    //starts a drag change, but doesn't change the type of the box because this is already a departure box, we only want to move it
+                    setCurrentDragChange("D");
+                }
+                if (selectedBox.getLabel() == "A" && getCurrentDragChange() == "N") {
+                    //starts a drag change, but doesn't change the type of the box because this is already an arrival box, we only want to move it
+                    setCurrentDragChange("A");
+                }
+            }
+            //sets the isSelected boolean of the box to true for the next computation, so that the box is not selected for the first time anymore
+            getBoxes(i, j).setSelected(true);
+        }
+
+    }
+
+	/**
 	 * Creates a new maze of the specified height and width.
 	 *
 	 * @param height the height of the maze

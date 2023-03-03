@@ -271,87 +271,17 @@ public class GUI extends JFrame implements ChangeListener {
     }
 
     /**
-     * Updates the type of the box at the given coordinates (i, j) to the given
-     * newType.
-     *
-     * @param i       the x coordinate of the box to be updated
-     * @param j       the y coordinate of the box to be updated
-     * @param newType the new type of the box
+     * Asks the maze to deselect all boxes.
      */
-    private void changeBox(int i, int j, String newType) {
-        maze.updateBox(i, j, newType);
+    public void mouseReleased(){
+        maze.mouseReleased();
     }
 
     /**
-     * Deselects all boxes if called by the mouseDetector.
+     * Sends the coordinates of the box that was clicked to the maze.
      */
-    public void mouseReleased() {
-        for (int i = 0; i < maze.getWidth(); i++) {
-            for (int j = 0; j < maze.getHeight(); j++) {
-                maze.getBoxes(i, j).setSelected(false);
-            }
-        }
-        //sets the current drag change to "N" for null
-        maze.setCurrentDragChange("N");
-    }
-
-    /**
-     * Handles a mouse click event at the given coordinates (x, y).
-     * Changes the type of the selected box and computes new placement of arrival or
-     * departure boxes if necessary.
-     *
-     * @param x           the x coordinate of the mouse click
-     * @param y           the y coordinate of the mouse click
-     * @param isLeftClick true if the click is a left-click, false if it is a
-     *                    right-click
-     */
-    public void click(int x, int y, boolean isLeftClick) {
-        // this part finds the selected box
-        MazeBox selectedBox = null;
-        for (int i = 0; i < maze.getWidth(); i++) {
-            for (int j = 0; j < maze.getHeight(); j++) {
-                //manages the isSelected boolean of the boxes, indicating if the box is selected for the first time or not
-                if (maze.getHexagon(i, j).contains(x, y)) {
-                    selectedBox = maze.getBoxes(i, j);
-                } else {
-                    maze.getBoxes(i, j).setSelected(false);
-                }
-            }
-        }
-        // this part changes the type of the selected box
-        if (selectedBox != null && selectedBox.isSelected() == false) { // if the box is selected for the first time
-            int i = selectedBox.getX();
-            int j = selectedBox.getY();
-            if (isLeftClick) { // if the click is a left-click
-                if (maze.getCurrentDragChange() != "N"
-                        && (selectedBox.getLabel() == "E" || selectedBox.getLabel() == "W")) {
-                    //the drag changes boxes to empty or wall
-                    changeBox(i, j, maze.getCurrentDragChange());
-                }
-
-                if (selectedBox.getLabel() == "E" && maze.getCurrentDragChange() == "N") {
-                    //starts a drag change
-                    changeBox(i, j, "W");
-                    maze.setCurrentDragChange("W");
-                }
-                if (selectedBox.getLabel() == "W" && maze.getCurrentDragChange() == "N") {
-                    //starts a drag change
-                    changeBox(i, j, "E");
-                    maze.setCurrentDragChange("E");
-                }
-                if (selectedBox.getLabel() == "D" && maze.getCurrentDragChange() == "N") {
-                    //starts a drag change, but doesn't change the type of the box because this is already a departure box, we only want to move it
-                    maze.setCurrentDragChange("D");
-                }
-                if (selectedBox.getLabel() == "A" && maze.getCurrentDragChange() == "N") {
-                    //starts a drag change, but doesn't change the type of the box because this is already an arrival box, we only want to move it
-                    maze.setCurrentDragChange("A");
-                }
-            }
-            //sets the isSelected boolean of the box to true for the next computation, so that the box is not selected for the first time anymore
-            maze.getBoxes(i, j).setSelected(true);
-        }
-
+    public void click(int i, int j, boolean isLeftClick){
+        maze.click(i, j, isLeftClick);
     }
 
     /**
