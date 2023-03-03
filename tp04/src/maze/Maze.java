@@ -6,7 +6,6 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import graph.*;
-import javax.swing.*;
 import java.awt.*;
 import javax.swing.event.*;
 
