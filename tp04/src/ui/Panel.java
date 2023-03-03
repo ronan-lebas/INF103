@@ -5,10 +5,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import graph.Graph;
-import maze.Hexagon;
-import maze.Maze;
-
 /**
  * A JPanel class for drawing and managing the maze and its solution.
  * Contains a toggle button for showing or hiding the solution.
