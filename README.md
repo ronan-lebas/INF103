@@ -14,7 +14,7 @@ Mon but était de faire les contrôles de la façon la plus *user friendly* poss
 ### Gestion des labyrinthes
 * Le bouton `New` permet de générer un nouveau labyrinthe vide de taille renseignée par l'utilisateur
 * Le bouton `Load` permet de charger un labyrinthe du dossier `data` du projet
-    * Le dossier contient une collection de labyrinthes préexistants pour expérimenter différentes tailles de labyrinthes : `error.maze` n'est pas valide pour montrer la gestion d'erreurs.
+    * Le dossier contient une collection de labyrinthes préexistants pour expérimenter différentes tailles de labyrinthes : `error.maze` n'est pas valide pour montrer la gestion d'erreurs, et `test.maze` ne comporte pas de solution
 * L'application empêchera l'existence de labyrinthes invalides, par exemple ne comportant pas le bon nombre de cases de départ ou d'arrivée
 * Le bouton `Save` permet de sauvegarder un labyrinthe dans le dossier `data`, **il faut écrire le nom du fichier sans oublier l'extension `.maze`**
 * Si un labyrinthe est modifié et non enregistré, quitter l'application, créer un nouveau labyrinthe ou charger un autre labyrinthe proposera à l'utilisateur d'enregistrer le labyrinthe courant sous le nom de son choix : *ici, pas besoin de mettre l'extension `.maze`*

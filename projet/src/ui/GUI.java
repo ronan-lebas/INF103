@@ -42,7 +42,7 @@ public class GUI extends JFrame implements ChangeListener {
      * buttons.
      */
     public GUI() {
-        super("Maze Application");
+        super("Maze Application by Ronan Lebas");
         this.maze = new Maze();
         load(maze.getDefaultPath());
         Panel panel = new Panel(this);
