@@ -224,7 +224,7 @@ public class GUI extends JFrame implements ChangeListener {
         } catch (MazeReadingException ex) {
             JOptionPane.showMessageDialog(this, "An error occured : " + ex.getErrorText(), "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -239,7 +239,7 @@ public class GUI extends JFrame implements ChangeListener {
             maze.setEdited(false);
             maze.saveToTextFile(path);
         } catch (MazeReadingException ex) {
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
