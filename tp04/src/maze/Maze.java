@@ -366,6 +366,7 @@ public class Maze implements Graph {
 		}
 		//update the list of polygons to save and then detect clicks
 		fillHexagonsList();
+		edited = true;
 		stateChanged();
 	}
 
@@ -494,7 +495,6 @@ public class Maze implements Graph {
 	 * Notifies all the change listeners that the state has changed.
 	 */
 	public void stateChanged() {
-		edited = true;
 		ChangeEvent evt = new ChangeEvent(this);
 
 		for (ChangeListener listener : listeners) {
