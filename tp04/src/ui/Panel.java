@@ -31,8 +31,6 @@ public class Panel extends JPanel {
         int n = 2 * getGUI().getMaze().getD() * getGUI().getMaze().getWidth() + 2 * getGUI().getMaze().getBorder();
         int m = 2 * getGUI().getMaze().getD() * getGUI().getMaze().getHeight()
                 + (int) (1.5 * getGUI().getMaze().getBorder());
-        // int n = 500;
-        // int m = 500;
         setPreferredSize(new Dimension(n, m));
         JToggleButton toggle = new JToggleButton("Show solution");
         add(toggle, BorderLayout.SOUTH);

@@ -254,8 +254,6 @@ public class GUI extends JFrame implements ChangeListener {
      * @param g the graphics object to be used for drawing the solution
      */
     public void solve(Graphics g) {
-        // same as before, but with a specified graphics object, so this method can be
-        // used by the panel
         ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
         ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
         if (!(shortestPath.contains((Vertex) maze.getArrivalBox())
