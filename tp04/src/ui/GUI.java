@@ -4,13 +4,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.nio.file.NoSuchFileException;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import graph.*;
 import maze.*;
 
 /**
@@ -286,7 +283,7 @@ public class GUI extends JFrame implements ChangeListener {
      * @param args an array of command-line arguments for the program, useless here
      */
     public static void main(String[] args) {
-        GUI gui = new GUI();
+        new GUI();
     }
 
 }
