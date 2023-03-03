@@ -53,6 +53,8 @@ public class GUI extends JFrame implements ChangeListener {
         setContentPane(panel);
         // sets the window at the center of the screen
         setLocationRelativeTo(null);
+        //changes the icon of the application
+        setIconImage(new ImageIcon(maze.getDefaultDirectory()+"icon.png").getImage());
 
         JMenuBar menuBar = new JMenuBar();
         JMenuItem load = new JMenuItem("Load");
