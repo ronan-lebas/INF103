@@ -369,6 +369,28 @@ public class Maze implements Graph {
 		stateChanged();
 	}
 
+	/**
+     * Solves the maze and displays the shortest path using the specified
+     * graphics object.
+     *
+     * @param g the graphics object to be used for drawing the solution
+     */
+    public void solve(Graphics g) {
+        ShortestPaths shortestPaths = Dijkstra.dijkstra(this, getDepartureBox(), getArrivalBox());
+        ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(getArrivalBox());
+        if (!(shortestPath.contains((Vertex) getArrivalBox())
+                && shortestPath.contains((Vertex) getDepartureBox()))) {
+					//there is no solution
+					setShowSolution(false);
+        } else {
+            for (int i = 1; i < shortestPath.size() - 1; i++) {
+                getHexagon(((MazeBox) shortestPath.get(i)).getX(), ((MazeBox) shortestPath.get(i)).getY())
+                        .paint(g, Color.CYAN);
+            }
+        }
+		stateChanged();
+    }
+
 	// handle gui (the maze is the model)
 	private String currentDragChange = "N";
 	private boolean edited = false;

@@ -75,15 +75,18 @@ public class Panel extends JPanel {
      * Notifies the panel that it needs to be updated and repainted.
      */
     public void notifyForUpdate() {
+        //handles the case when there isn't a solution
+        if(! gui.getMaze().getShowSolution() && toggle.isSelected()) eraseSolution();
+        
         repaint();
     }
 
     /**
-     * Erases the solution from the maze and turns off the showing of the solution.
+     * Erases the solution from the maze and turns off the toggle button.
      */
     public void eraseSolution() {
-        gui.getMaze().setShowSolution(false);
         toggle.setSelected(false);
+        JOptionPane.showMessageDialog(this, "There is no solution", "Error", JOptionPane.ERROR_MESSAGE);
         repaint();
     }
 

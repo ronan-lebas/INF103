@@ -248,24 +248,12 @@ public class GUI extends JFrame implements ChangeListener {
     }
 
     /**
-     * Solves the current maze and displays the shortest path using the specified
-     * graphics object.
-     *
-     * @param g the graphics object to be used for drawing the solution
+     * Asks the maze to solve itself
+     * 
+     * @param g the Graphics object to draw on
      */
-    public void solve(Graphics g) {
-        ShortestPaths shortestPaths = Dijkstra.dijkstra(maze, maze.getDepartureBox(), maze.getArrivalBox());
-        ArrayList<Vertex> shortestPath = shortestPaths.getShortestPath(maze.getArrivalBox());
-        if (!(shortestPath.contains((Vertex) maze.getArrivalBox())
-                && shortestPath.contains((Vertex) maze.getDepartureBox()))) {
-            panel.eraseSolution();
-            JOptionPane.showMessageDialog(this, "There is no solution", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            for (int i = 1; i < shortestPath.size() - 1; i++) {
-                getMaze().getHexagon(((MazeBox) shortestPath.get(i)).getX(), ((MazeBox) shortestPath.get(i)).getY())
-                        .paint(g, Color.CYAN);
-            }
-        }
+    public void solve(Graphics g){
+        maze.solve(g);
     }
 
     /**
