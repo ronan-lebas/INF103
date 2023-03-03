@@ -232,7 +232,7 @@ public class GUI extends JFrame implements ChangeListener {
     /**
      * Saves the current maze to a text file at the specified path.
      *
-     * @param path the path where the maze will be saved
+     * @param path the path where the maze will be saved, contains the name of the file
      */
     public void save(final String path) {
         try {

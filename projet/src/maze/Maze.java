@@ -17,7 +17,7 @@ public class Maze implements Graph {
 	private int width;
 	// The default path and directory are used for loading/saving maze files.
 	private final String defaultPath = "projet/data/default.maze";
-	private final String defaultDirectory = "./projet/data";
+	private final String defaultDirectory = "projet/data/";
 	private MazeBox[][] boxes;
 	private ArrivalBox arrivalBox;
 	private DepartureBox departureBox;
