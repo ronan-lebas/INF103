@@ -1,4 +1,6 @@
-# Projet Java, Ronan LEBAS
+# INF103
+## Introduction
+Ce dépôt contient le projet du cours **INF103** : **Langage JAVA** de Télécom Paris pour l'année 2022-2023. L'objectif était de concevoir une application pour gérer et résoudre des labyrinthes hexagonaux. 
 ## Comment l'utiliser ?
 ### Lancer le programme
 Il faut exécuter la classe `GUI.java` qui se trouve dans `projet/src/ui`.

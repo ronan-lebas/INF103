@@ -1,8 +1,0 @@
-package maze;
-import graph.Graph;
-
-public class Maze implements Graph{
-	public Maze() {
-		
-	}
-}
